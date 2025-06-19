@@ -17,7 +17,7 @@ public class AdminController {
     @GetMapping()
     public CommonResponse getList() throws Exception {
         return CommonResponse.success(service.getList(), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
-    } 
+    }
 
     @GetMapping("/{id}")
     public CommonResponse getOne(AdminDto.SearchRequest request) throws Exception {
