@@ -33,7 +33,7 @@ public class AdminService {
         Optional<AdminEntity> optional=repository.findById(request.getId());
         if(optional.isEmpty()){
             throw new BaseException(ErrorCode.RESPONSE_FAIL_SEARCH);
-        } 
+        }
         return AdminDto.Response.fromEntity(optional.get());
     }
 
