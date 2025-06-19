@@ -8,6 +8,7 @@ public class StoreDto {
     public static class Common {
         private String name;
         private String businessNumber;
+        private String ceo;
         private String phone;
         private String email;
         private String address;

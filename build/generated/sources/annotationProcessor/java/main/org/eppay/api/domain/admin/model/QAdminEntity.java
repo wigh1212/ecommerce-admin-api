@@ -19,11 +19,15 @@ public class QAdminEntity extends EntityPathBase<AdminEntity> {
 
     public static final QAdminEntity adminEntity = new QAdminEntity("adminEntity");
 
+    public final StringPath displayName = createString("displayName");
+
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final StringPath name = createString("name");
 
     public final StringPath password = createString("password");
+
+    public final NumberPath<Long> storeId = createNumber("storeId", Long.class);
 
     public final StringPath type = createString("type");
 

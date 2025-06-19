@@ -1,17 +1,18 @@
 package org.eppay.api.domain.store.service;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.annotation.PostConstruct;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.eppay.api.common.enums.ErrorCode;
 import org.eppay.api.common.error.BaseException;
+import org.eppay.api.domain.admin.model.AdminDto;
+import org.eppay.api.domain.admin.service.AdminService;
 import org.eppay.api.domain.store.model.StoreDto;
 import org.eppay.api.domain.store.model.StoreEntity;
 import org.eppay.api.domain.store.repository.StoreRepository;
-import org.eppay.api.util.JwtTokenUtil;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +24,8 @@ import java.util.stream.Collectors;
 public class StoreService {
 
     private final StoreRepository repository;
-
+    private final AdminService adminService;
+    private final ObjectMapper objectMapper;
 
     public List<StoreDto.Response> getList() throws Exception{
         return repository.findAll().stream().map(StoreDto.Response::fromEntity).collect(Collectors.toList());
@@ -38,13 +40,24 @@ public class StoreService {
     }
 
 
+    @Transactional
     public StoreDto.Response create(StoreDto.CreateRequest request) throws Exception{
         Optional<StoreEntity> optional = repository.findByBusinessNumber(request.getBusinessNumber());
         if(optional.isPresent()){
             throw new BaseException(ErrorCode.RESPONSE_FAIL_INSERT);
         }
+        StoreDto.Response saveStore=StoreDto.Response.fromEntity(repository.save(request.toEntity()));
 
-        return StoreDto.Response.fromEntity(repository.save(request.toEntity()));
+        AdminDto.CreateRequest admin=new AdminDto.CreateRequest();
+        admin.setPassword("0000");
+        admin.setUserName(request.getBusinessNumber());
+        admin.setType("STORE");
+        admin.setName(saveStore.getCeo());
+        admin.setDisplayName(saveStore.getName());
+        admin.setStoreId(saveStore.getId());
+        adminService.create(admin);
+
+        return saveStore;
     }
 
 
@@ -69,5 +82,11 @@ public class StoreService {
         repository.delete(optional.get());
 
         return "200";
+    }
+
+
+    @PostConstruct
+    public void init() throws JsonProcessingException {
+        System.out.println("값 확인 : "+objectMapper.writeValueAsString(repository.findById(2L)));
     }
 }

@@ -24,6 +24,8 @@ public class AdminEntity implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+    @Column(name = "display_name")
+    private String displayName;
     @Column(name = "user_name")
     private String userName;
     @Column(name = "name")
@@ -32,6 +34,9 @@ public class AdminEntity implements UserDetails {
     private String password;
     @Column(name = "type")
     private String type;
+    @Column(name = "store_id")
+    private Long storeId;
+
 
 
     @Override

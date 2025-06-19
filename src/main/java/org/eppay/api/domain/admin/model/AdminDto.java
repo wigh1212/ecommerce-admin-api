@@ -10,9 +10,11 @@ public class AdminDto {
     @Data
     public static class Common {
         private String userName;
+        private String displayName;
         private String name;
         private String password;
         private String type;
+        private Long storeId;
 
         public AdminEntity toEntity(Long id) {
             return AdminEntity.builder()
@@ -78,5 +80,12 @@ public class AdminDto {
         public AdminEntity toEntity() {
             return super.toEntity(id);
         }
+    }
+
+
+    @Data
+    public static class login {
+        private String userName;
+        private String password;
     }
 }
