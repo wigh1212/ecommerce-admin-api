@@ -39,9 +39,10 @@ public class JwtTokenUtil {
 
         AdminEntity adminEntity = (AdminEntity) userDetails;
         extraClaims.put("username",adminEntity.getUsername());
-//        extraClaims.put("stayId",adminEntity.getStayId());
-//        extraClaims.put("auth",adminEntity.getAuth());
-//        extraClaims.put("kind",adminEntity.getKind());
+        extraClaims.put("displayName",adminEntity.getDisplayName());
+        extraClaims.put("name",adminEntity.getName());
+        extraClaims.put("type",adminEntity.getType());
+        extraClaims.put("storeId",adminEntity.getStoreId());
 
         return Jwts.builder()
                 .setClaims(extraClaims)
@@ -65,7 +66,7 @@ public class JwtTokenUtil {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    private Claims extractAllClaims(String token) {
+    public Claims extractAllClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getSignInKey())
                 .build()

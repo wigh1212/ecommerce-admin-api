@@ -8,6 +8,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.eppay.api.common.enums.ErrorCode;
 import org.eppay.api.common.error.BaseException;
+import org.eppay.api.common.loginAccount.LoginAccount;
+import org.eppay.api.common.loginAccount.LoginService;
 import org.eppay.api.domain.admin.model.AdminDto;
 import org.eppay.api.domain.admin.service.AdminService;
 import org.eppay.api.domain.store.model.StoreDto;
@@ -26,9 +28,19 @@ public class StoreService {
     private final StoreRepository repository;
     private final AdminService adminService;
     private final ObjectMapper objectMapper;
+    private final LoginService loginService;
 
     public List<StoreDto.Response> getList() throws Exception{
-        return repository.findAll().stream().map(StoreDto.Response::fromEntity).collect(Collectors.toList());
+        LoginAccount account=loginService.getAccount();
+
+        if(account.getType().equals("ADMIN")){
+            return repository.findAll().stream().map(StoreDto.Response::fromEntity).collect(Collectors.toList());
+        }
+        else if(account.getType().equals("STORE")){
+            return  repository.findById(account.getStoreId()).stream().map(StoreDto.Response::fromEntity).collect(Collectors.toList());
+        }
+
+        return null;
     }
 
     public StoreDto.Response getOne(StoreDto.SearchRequest request) throws Exception{

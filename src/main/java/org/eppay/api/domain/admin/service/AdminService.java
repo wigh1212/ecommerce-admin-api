@@ -1,6 +1,7 @@
 package org.eppay.api.domain.admin.service;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.eppay.api.util.JwtTokenUtil;
@@ -26,7 +27,9 @@ public class AdminService {
 
     private final AdminRepository repository;
     private final AuthenticationProvider authenticationProvider;
-//    private final ModelMapper modelMapper;
+    private final ModelMapper modelMapper; // class to class
+    private final ObjectMapper objectMapper; // object to class  // class to json
+
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenUtil jwtTokenUtil;
 
@@ -49,6 +52,9 @@ public class AdminService {
         if(optional.isPresent()){
             throw new BaseException(ErrorCode.RESPONSE_FAIL_INSERT);
         }
+
+//        modelMapper.map(repository.save(request.toEntity()),AdminDto.Response.class);
+
         return AdminDto.Response.fromEntity(repository.save(request.toEntity()));
     }
 

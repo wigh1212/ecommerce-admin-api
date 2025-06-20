@@ -22,6 +22,8 @@ public class AdminDto {
                     .userName(this.getUserName())
                     .name(this.getName())
                     .password(this.getPassword())
+                    .displayName(this.getDisplayName())
+                    .storeId(this.getStoreId())
                     .type(this.getType())
                     .build();
         }
@@ -62,6 +64,8 @@ public class AdminDto {
             response.setUserName(entity.getUsername());
             response.setName(entity.getName());
             response.setPassword(entity.getPassword());
+            response.setDisplayName(entity.getDisplayName());
+            response.setStoreId(entity.getStoreId());
             response.setType(entity.getType());
             return response;
         }

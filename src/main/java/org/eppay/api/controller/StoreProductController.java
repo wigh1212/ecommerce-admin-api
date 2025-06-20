@@ -28,12 +28,12 @@ public class StoreProductController {
     }
 
     @PostMapping()
-    public CommonResponse create(@RequestBody  @Valid StoreProductDto.CreateRequest request) throws Exception {
+    public CommonResponse create(@RequestBody StoreProductDto.CreateRequest request) throws Exception {
         return CommonResponse.success(service.create(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }
 
     @PutMapping("/{id}")
-    public CommonResponse update(@RequestBody @Valid StoreProductDto.UpdateRequest request) throws Exception {
+    public CommonResponse update(@RequestBody StoreProductDto.UpdateRequest request) throws Exception {
         return CommonResponse.success(service.update(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }
 

@@ -43,7 +43,7 @@ public class StoreEntity extends BaseCommEntity {
     @Column(name = "status")
     private String status;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name="store_id")
     private List<StoreProductEntity> storeProductList;
 
