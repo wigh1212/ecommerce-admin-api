@@ -46,7 +46,6 @@ public class ControllerAop {
 
         Long storeId = extractStoreIdFromUri(requestUrl);
         if (storeId == null) return;
-
         LoginAccount account=loginService.getAccount();
         if(account.getStoreId()==null){
             return;

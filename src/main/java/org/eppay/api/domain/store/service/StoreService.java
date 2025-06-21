@@ -95,10 +95,4 @@ public class StoreService {
 
         return "200";
     }
-
-
-    @PostConstruct
-    public void init() throws JsonProcessingException {
-        System.out.println("값 확인 : "+objectMapper.writeValueAsString(repository.findById(2L)));
-    }
 }

@@ -1,10 +1,13 @@
 package org.eppay.api.domain.storeEvent.service;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.eppay.api.common.enums.ErrorCode;
 import org.eppay.api.common.error.BaseException;
+import org.eppay.api.config.S3Config;
 import org.eppay.api.domain.storeEvent.model.StoreEventDto;
 import org.eppay.api.domain.storeEvent.model.StoreEventEntity;
 import org.eppay.api.domain.storeEvent.repository.StoreEventRepository;
@@ -19,6 +22,9 @@ import java.util.stream.Collectors;
 public class StoreEventService {
 
     private final StoreEventRepository repository;
+
+    private final S3Config s3Config;
+
     private final ObjectMapper objectMapper;
 
     public List<StoreEventDto.Response> getList(StoreEventDto.SearchRequest request) throws Exception{
@@ -33,12 +39,9 @@ public class StoreEventService {
         return StoreEventDto.Response.fromEntity(optional.get());
     }
 
-
     public StoreEventDto.Response create(StoreEventDto.CreateRequest request) throws Exception{
         return StoreEventDto.Response.fromEntity(repository.save(request.toEntity()));
     }
-
-
     public StoreEventDto.Response update(StoreEventDto.UpdateRequest request) throws Exception{
         Optional<StoreEventEntity> optional=repository.findByIdAndStoreId(request.getId(), request.getStoreId());
         if(optional.isEmpty()){
@@ -59,5 +62,9 @@ public class StoreEventService {
         repository.delete(optional.get());
 
         return "200";
+    }
+
+    public void init(){
+
     }
 }
