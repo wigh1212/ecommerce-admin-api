@@ -46,6 +46,8 @@ public class QStoreEntity extends EntityPathBase<StoreEntity> {
 
     public final StringPath status = createString("status");
 
+    public final ListPath<org.eppay.api.domain.storeEvent.model.StoreEventEntity, org.eppay.api.domain.storeEvent.model.QStoreEventEntity> storeEventList = this.<org.eppay.api.domain.storeEvent.model.StoreEventEntity, org.eppay.api.domain.storeEvent.model.QStoreEventEntity>createList("storeEventList", org.eppay.api.domain.storeEvent.model.StoreEventEntity.class, org.eppay.api.domain.storeEvent.model.QStoreEventEntity.class, PathInits.DIRECT2);
+
     public final ListPath<org.eppay.api.domain.storeProduct.model.StoreProductEntity, org.eppay.api.domain.storeProduct.model.QStoreProductEntity> storeProductList = this.<org.eppay.api.domain.storeProduct.model.StoreProductEntity, org.eppay.api.domain.storeProduct.model.QStoreProductEntity>createList("storeProductList", org.eppay.api.domain.storeProduct.model.StoreProductEntity.class, org.eppay.api.domain.storeProduct.model.QStoreProductEntity.class, PathInits.DIRECT2);
 
     //inherited
