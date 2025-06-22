@@ -4,56 +4,80 @@ package org.eppay.api.domain.banner.service;
 import lombok.RequiredArgsConstructor;
 import org.eppay.api.common.enums.ErrorCode;
 import org.eppay.api.common.error.BaseException;
-import org.eppay.api.domain.banner.model.UserDto;
-import org.eppay.api.domain.banner.model.UserEntity;
-import org.eppay.api.domain.banner.repository.UserRepository;
+import org.eppay.api.common.loginAccount.LoginAccount;
+import org.eppay.api.common.loginAccount.LoginService;
+import org.eppay.api.domain.banner.model.BannerDto;
+import org.eppay.api.domain.banner.model.BannerEntity;
+import org.eppay.api.domain.banner.repository.BannerRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
-
+public class BannerService {
+    private final LoginService loginService;
     private final BannerRepository repository;
-    public List<UserDto.Response> getList() throws Exception{
-        return repository.findAll().stream().map(UserDto.Response::fromEntity).collect(Collectors.toList());
+    public List<BannerDto.Response> getList() throws Exception{
+        return repository.findAll().stream().map(BannerDto.Response::fromEntity).collect(Collectors.toList());
     }
 
-    public UserDto.Response getOne(UserDto.SearchRequest request) throws Exception{
-        Optional<UserEntity> optional=repository.findById(request.getId());
+    public BannerDto.Response getOne(BannerDto.SearchRequest request) throws Exception{
+        Optional<BannerEntity> optional=repository.findById(request.getId());
         if(optional.isEmpty()){
             throw new BaseException(ErrorCode.RESPONSE_FAIL_SEARCH);
         }
-        return UserDto.Response.fromEntity(optional.get());
+        return BannerDto.Response.fromEntity(optional.get());
     }
 
 
-    public UserDto.Response create(UserDto.CreateRequest request) throws Exception{
-        return UserDto.Response.fromEntity(repository.save(request.toEntity()));
+    public BannerDto.Response create(BannerDto.CreateRequest request) throws Exception{
+        LoginAccount account=loginService.getAccount();
+
+        request.setActivate(true);
+        request.setApplyAt(LocalDateTime.now());
+        request.setApplyBy(account.getUsername());
+
+        return BannerDto.Response.fromEntity(repository.save(request.toEntity()));
     }
 
-
-    public UserDto.Response update(UserDto.UpdateRequest request) throws Exception{
-        Optional<UserEntity> optional=repository.findById(request.getId());
+    public BannerDto.Response update(BannerDto.UpdateRequest request) throws Exception{
+        Optional<BannerEntity> optional=repository.findById(request.getId());
         if(optional.isEmpty()){
             throw new BaseException(ErrorCode.RESPONSE_FAIL_UPDATE);
         }
-        request.setUserName(optional.get().getUserName());
-        request.setPassword(optional.get().getPassword());
-        return UserDto.Response.fromEntity(repository.save(request.toEntity()));
+
+        BannerEntity entity=optional.get();
+
+        request.setApplyAt(entity.getApplyAt());
+        request.setApplyBy(entity.getApplyBy());
+        request.setActivate(entity.isActivate());
+
+        return BannerDto.Response.fromEntity(repository.save(request.toEntity()));
     }
 
-    public String delete(UserDto.DeleteRequest request) throws Exception{
-        Optional<UserEntity> optional=repository.findById(request.getId());
+    public BannerDto.Response delete(BannerDto.DeleteRequest request) throws Exception{
+        Optional<BannerEntity> optional=repository.findById(request.getId());
         if(optional.isEmpty()){
             throw new BaseException(ErrorCode.RESPONSE_FAIL_DELETE);
         }
+        BannerEntity banner=optional.get();
 
-        repository.delete(optional.get());
 
-        return "200";
+
+        if(banner.isActivate()){
+            banner.setActivate(false);
+        }
+        else{
+            LoginAccount account=loginService.getAccount();
+            banner.setActivate(true);
+            banner.setApplyBy(account.getUsername());
+            banner.setApplyAt(LocalDateTime.now());
+        }
+
+        return BannerDto.Response.fromEntity(repository.save(banner));
     }
 }

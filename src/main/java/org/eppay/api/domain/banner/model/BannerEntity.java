@@ -26,7 +26,7 @@ public class BannerEntity extends BaseCommEntity {
     @Column(name = "type")
     private String type;
     @Column(name = "activate")
-    private String activate;
+    private boolean activate;
     @Column(name = "apply_at")
     private LocalDateTime applyAt;
     @Column(name = "apply_by")

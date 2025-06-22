@@ -1,5 +1,6 @@
 package org.eppay.api.domain.banner.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import lombok.Data;
 
@@ -13,7 +14,7 @@ public class BannerDto {
         private String image;
         private String link;
         private String type;
-        private String activate;
+        private boolean activate;
         private LocalDateTime applyAt;
         private String applyBy;
 
@@ -59,7 +60,9 @@ public class BannerDto {
         private String image;
         private String link;
         private String type;
-        private String activate;
+        private boolean activate;
+
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
         private LocalDateTime applyAt;
         private String applyBy;
         public static Response fromEntity(BannerEntity entity) {
@@ -68,7 +71,7 @@ public class BannerDto {
             response.setImage(entity.getImage());
             response.setLink(entity.getLink());
             response.setType(entity.getType());
-            response.setActivate(entity.getActivate());
+            response.setActivate(entity.isActivate());
             response.setApplyAt(entity.getApplyAt());
             response.setApplyBy(entity.getApplyBy());
             return response;
