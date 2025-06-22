@@ -64,7 +64,4 @@ public class StoreEventService {
         return "200";
     }
 
-    public void init(){
-
-    }
 }
