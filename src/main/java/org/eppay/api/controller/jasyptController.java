@@ -1,4 +1,92 @@
 package org.eppay.api.controller;
 
+import lombok.RequiredArgsConstructor;
+import org.eppay.api.common.response.CommonResponse;
+import org.eppay.api.config.JasyptConfig;
+import org.eppay.api.domain.jasypt.model.JasyptDto;
+import org.jasypt.encryption.StringEncryptor;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Set;
+
+@RestController
+@RequestMapping("/api/v1/jasypt")
+@RequiredArgsConstructor
 public class jasyptController {
+
+    Set<String> SENSITIVE_KEYS = Set.of("spring.datasource.password", "spring.datasource.username", "aws.s3.key", "aws.s3.secret", "stayMoa.kakao.api.addres.key");
+    private final StringEncryptor encryptor;
+
+    @PostMapping("enc")
+    public String getEnc(@RequestBody JasyptDto.SearchRequest request ){
+        return encryptor.encrypt(request.getText());
+    }
+
+    @PostMapping("dec")
+    public String getDec(@RequestBody JasyptDto.SearchRequest request ){
+        return encryptor.decrypt(request.getText());
+    }
+
+    @PostMapping("properties/enc")
+    public String getPropertiesEnc(@RequestPart("file") MultipartFile file) throws IOException {
+            String content = new String(file.getBytes(), StandardCharsets.UTF_8);
+            StringBuilder result = new StringBuilder();
+
+            for (String line : content.split("\n")) {
+                if (line.trim().isEmpty() || line.trim().startsWith("#")) {
+                    result.append(line).append("\n");
+                    continue;
+                }
+
+                if (line.contains("=")) {
+                    String[] parts = line.split("=", 2);
+                    String key = parts[0].trim();
+                    String value = parts[1].trim();
+
+                    if (SENSITIVE_KEYS.contains(key)) {
+                        String encrypted = encryptor.encrypt(value);
+                        result.append(key).append("=ENC(").append(encrypted).append(")\n");
+                    } else {
+                        result.append(line).append("\n");
+                    }
+                } else {
+                    result.append(line).append("\n");
+                }
+            }
+            return result.toString();
+    }
+
+    @PostMapping("properties/dec")
+    public String getPropertiesDec(@RequestPart("file") MultipartFile file) throws IOException {
+        String content = new String(file.getBytes(), StandardCharsets.UTF_8);
+        StringBuilder result = new StringBuilder();
+
+        for (String line : content.split("\n")) {
+            if (line.trim().isEmpty() || line.trim().startsWith("#")) {
+                result.append(line).append("\n");
+                continue;
+            }
+
+            if (line.contains("=")) {
+                String[] parts = line.split("=", 2);
+                String key = parts[0].trim();
+                String value = parts[1].trim();
+
+                if (SENSITIVE_KEYS.contains(key) && value.startsWith("ENC(") && value.endsWith(")")) {
+                    String encValue = value.substring(4, value.length() - 1);
+                    String decrypted = encryptor.decrypt(encValue);
+                    result.append(key).append("=").append(decrypted).append("\n");
+                } else {
+                    result.append(line).append("\n");
+                }
+            } else {
+                result.append(line).append("\n");
+            }
+        }
+        return result.toString();
+    }
 }

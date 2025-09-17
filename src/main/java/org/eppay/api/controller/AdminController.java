@@ -24,10 +24,10 @@ public class AdminController {
         return CommonResponse.success(service.getOne(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }
 
-//    @PostMapping()
-//    public CommonResponse create(@RequestBody AdminDto.CreateRequest request) throws Exception {
-//        return CommonResponse.success(service.create(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
-//    }
+    @PostMapping()
+    public CommonResponse create(@RequestBody AdminDto.CreateRequest request) throws Exception {
+        return CommonResponse.success(service.create(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
+    }
 
     @PutMapping("/{id}")
     public CommonResponse update(@RequestBody AdminDto.UpdateRequest request) throws Exception {
