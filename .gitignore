@@ -4,4 +4,4 @@
 .gradle/
 *.war
 *.jar
-/.idea
+/.idea/*
