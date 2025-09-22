@@ -11,33 +11,33 @@ import org.eppay.api.domain.storeProduct.service.StoreProductService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/store/{storeId}/product")
+@RequestMapping("/api/v1/store")
 @RequiredArgsConstructor
 public class StoreProductController {
 
     private final StoreProductService service;
 
-    @GetMapping()
+    @GetMapping("/{storeId}/product")
     public CommonResponse getList(StoreProductDto.SearchRequest request) throws Exception {
         return CommonResponse.success(service.getList(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{storeId}/product/{id}")
     public CommonResponse getOne(StoreProductDto.SearchRequest request) throws Exception {
         return CommonResponse.success(service.getOne(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }
 
-    @PostMapping()
+    @PostMapping("/{storeId}/product")
     public CommonResponse create(@RequestBody StoreProductDto.CreateRequest request) throws Exception {
         return CommonResponse.success(service.create(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{storeId}/product/{id}")
     public CommonResponse update(@RequestBody StoreProductDto.UpdateRequest request) throws Exception {
         return CommonResponse.success(service.update(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{storeId}/product/{id}")
     public CommonResponse delete( StoreProductDto.DeleteRequest request) throws Exception {
         return CommonResponse.success(service.delete(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }

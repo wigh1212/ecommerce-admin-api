@@ -3,12 +3,17 @@ package org.eppay.api.domain.banner.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
 @Data
 public class BannerDto {
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class Common {
 
         private String image;
@@ -31,12 +36,18 @@ public class BannerDto {
         }
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class SearchRequest extends Common {
         private Long id;
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class CreateRequest extends Common {
         private Long id;
 
@@ -45,7 +56,10 @@ public class BannerDto {
         }
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class UpdateRequest extends Common {
         private Long id;
 
@@ -55,6 +69,8 @@ public class BannerDto {
     }
 
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class Response {
         private Long id;
         private String image;
@@ -79,12 +95,17 @@ public class BannerDto {
     }
 
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class DeleteRequest {
         private Long id;
     }
 
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class Custom extends Common {
         private Long id;
 

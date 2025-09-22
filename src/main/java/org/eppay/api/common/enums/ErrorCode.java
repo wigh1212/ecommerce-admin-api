@@ -49,6 +49,10 @@ public enum ErrorCode {
     COMMON_QR_SYSTEM_ERROR("4001","QR 시스템 오류 입니다."),
 
     EMPTY_BANK("5001","존재하지 않는 은행 id 입니다."), // 존재하지 않는 bank id
+
+    EXIST_BUSINESS_NUMBER("5002","사업자번호가 중복입니다."),
+    EXIST_MAPPING("5003","이미 존재하는 매칭정보입니다."),
+    NOT_EXIST_CATEGORY_ID("5004","존재하지 않는 카테고리 아이디입니다."),
     ;
 
 

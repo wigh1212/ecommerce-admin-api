@@ -56,9 +56,11 @@ public class StoreService {
     public StoreDto.Response create(StoreDto.CreateRequest request) throws Exception{
         Optional<StoreEntity> optional = repository.findByBusinessNumber(request.getBusinessNumber());
         if(optional.isPresent()){
-            throw new BaseException(ErrorCode.RESPONSE_FAIL_INSERT);
+            throw new BaseException(ErrorCode.EXIST_BUSINESS_NUMBER);
         }
-        StoreDto.Response saveStore=StoreDto.Response.fromEntity(repository.save(request.toEntity()));
+        StoreEntity save=request.toEntity();
+        save.setStatus(true);
+        StoreDto.Response saveStore=StoreDto.Response.fromEntity(repository.save(save));
 
         AdminDto.CreateRequest admin=new AdminDto.CreateRequest();
         admin.setPassword("0000");

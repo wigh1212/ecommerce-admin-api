@@ -14,11 +14,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 @Builder
 @Table(name = "store")
 public class StoreEntity extends BaseCommEntity {
@@ -42,7 +42,7 @@ public class StoreEntity extends BaseCommEntity {
     @Column(name = "image")
     private String image;
     @Column(name = "status")
-    private String status;
+    private Boolean status;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name="store_id")

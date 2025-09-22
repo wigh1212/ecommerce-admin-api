@@ -4,16 +4,23 @@ import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
+import java.math.BigDecimal;
 
 @Data
 public class StoreProductDto {
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class Common {
 
         @NotNull(message = "storeId는 필수 입니다.")
         private Long storeId;
         private String name;
-        private double amount;
+        private BigDecimal amount;
         private String image;
         private String info;
 
@@ -28,13 +35,17 @@ public class StoreProductDto {
                     .build();
         }
     }
-
+    @EqualsAndHashCode(callSuper = true)
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class SearchRequest extends Common {
         private Long id;
     }
-
+    @EqualsAndHashCode(callSuper = true)
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class CreateRequest extends Common {
         private Long id;
 
@@ -43,7 +54,10 @@ public class StoreProductDto {
         }
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class UpdateRequest extends Common {
         private Long id;
 
@@ -51,30 +65,36 @@ public class StoreProductDto {
             return super.toEntity(id);
         }
     }
-
+    @EqualsAndHashCode(callSuper = true)
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class Response extends Common {
         private Long id;
 
         public static Response fromEntity(StoreProductEntity entity) {
-            Response response = new Response();
-            response.setId(entity.getId());
-            response.setStoreId(entity.getStoreId());
-            response.setName(entity.getName());
-            response.setImage(entity.getImage());
-            response.setInfo(entity.getInfo());
-            response.setAmount(entity.getAmount());
-            return response;
+            return Response.builder()
+                    .id(entity.getId())
+                    .storeId(entity.getStoreId())
+                    .name(entity.getName())
+                    .amount(entity.getAmount())
+                    .image(entity.getImage())
+                    .info(entity.getInfo())
+                    .build();
         }
     }
-
+    @EqualsAndHashCode(callSuper = true)
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class DeleteRequest extends Common{
         private Long id;
     }
 
-
+    @EqualsAndHashCode(callSuper = true)
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class Custom extends Common {
         private Long id;
 

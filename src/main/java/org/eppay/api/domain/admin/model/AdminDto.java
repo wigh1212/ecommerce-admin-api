@@ -4,10 +4,15 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Data
 public class AdminDto {
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class Common {
         private String userName;
         private String displayName;
@@ -29,12 +34,18 @@ public class AdminDto {
         }
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class SearchRequest extends Common {
         private Long id;
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class CreateRequest extends Common {
         private Long id;
 
@@ -43,7 +54,10 @@ public class AdminDto {
         }
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class UpdateRequest extends Common {
         private Long id;
 
@@ -54,7 +68,10 @@ public class AdminDto {
         }
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class Response extends Common {
         private Long id;
 
@@ -72,12 +89,17 @@ public class AdminDto {
     }
 
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class DeleteRequest {
         private Long id;
     }
 
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class Custom extends Common {
         private Long id;
 

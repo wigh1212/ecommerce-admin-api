@@ -1,14 +1,17 @@
-package org.eppay.api.domain.storeEvent.model;
+package org.eppay.api.domain.storeProductMapCategory.model;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.eppay.api.domain.storeProduct.model.StoreProductDto;
 
-@Data
-public class StoreEventDto {
+import java.util.List;
+
+public class StoreProductMapCategoryDto {
     @Data
     @SuperBuilder
     @NoArgsConstructor
@@ -16,17 +19,15 @@ public class StoreEventDto {
 
         @NotNull(message = "storeId는 필수 입니다.")
         private Long storeId;
-        private String name;
-        private String image;
-        private String link;
+        private Long storeProductId;
+        private Long storeProductCategoryId;
 
-        public StoreEventEntity toEntity(Long id) {
-            return StoreEventEntity.builder()
+        public StoreProductMapCategoryEntity toEntity(Long id) {
+            return StoreProductMapCategoryEntity.builder()
                     .id(id)
                     .storeId(this.storeId)
-                    .name(this.name)
-                    .image(this.image)
-                    .link(this.link)
+                    .storeProductId(this.storeProductId)
+                    .storeProductCategoryId(this.storeProductCategoryId)
                     .build();
         }
     }
@@ -39,18 +40,15 @@ public class StoreEventDto {
         private Long id;
     }
 
-    @EqualsAndHashCode(callSuper = true)
     @Data
     @SuperBuilder
     @NoArgsConstructor
-    public static class CreateRequest extends Common {
+    public static class CreateRequest {
         private Long id;
+        private Long storeProductCategoryId;
+        private List<Long> storeProductIdList;
 
-        public StoreEventEntity toEntity() {
-            return super.toEntity(id);
-        }
     }
-
     @EqualsAndHashCode(callSuper = true)
     @Data
     @SuperBuilder
@@ -58,29 +56,28 @@ public class StoreEventDto {
     public static class UpdateRequest extends Common {
         private Long id;
 
-        public StoreEventEntity toEntity() {
+        public StoreProductMapCategoryEntity toEntity() {
             return super.toEntity(id);
         }
     }
-
     @EqualsAndHashCode(callSuper = true)
     @Data
     @SuperBuilder
     @NoArgsConstructor
     public static class Response extends Common {
         private Long id;
-
-        public static Response fromEntity(StoreEventEntity entity) {
+        private StoreProductDto.Response storeProduct;
+        public static Response fromEntity(StoreProductMapCategoryEntity entity) {
             return Response.builder()
-                   .id(entity.getId())
-                   .storeId(entity.getStoreId())
-                   .name(entity.getName())
-                   .image(entity.getImage())
-                   .link(entity.getLink())
-                   .build();
+                    .id(entity.getId())
+                    .storeId(entity.getStoreId())
+                    .storeProductId(entity.getStoreProductId())
+                    .storeProductCategoryId(entity.getStoreProductCategoryId())
+                    .storeProduct(StoreProductDto.Response.fromEntity(entity.getStoreProduct()))
+                    .build();
+
         }
     }
-
     @EqualsAndHashCode(callSuper = true)
     @Data
     @SuperBuilder
@@ -89,7 +86,6 @@ public class StoreEventDto {
         private Long id;
     }
 
-
     @EqualsAndHashCode(callSuper = true)
     @Data
     @SuperBuilder
@@ -97,7 +93,7 @@ public class StoreEventDto {
     public static class Custom extends Common {
         private Long id;
 
-        public StoreEventEntity toEntity() {
+        public StoreProductMapCategoryEntity toEntity() {
             return super.toEntity(id);
         }
     }

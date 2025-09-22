@@ -26,25 +26,24 @@ public class StoreProductService {
     }
 
     public StoreProductDto.Response getOne(StoreProductDto.SearchRequest request) throws Exception{
-        Optional<StoreProductEntity> optional=repository.findByIdAndStoreId(request.getId(),request.getStoreId());
-        if(optional.isEmpty()){
-            throw new BaseException(ErrorCode.RESPONSE_FAIL_SEARCH);
-        }
-        return StoreProductDto.Response.fromEntity(optional.get());
+        return StoreProductDto.Response.fromEntity(repository.findByIdAndStoreId(request.getId(),request.getStoreId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_SEARCH)));
     }
 
 
     public StoreProductDto.Response create(StoreProductDto.CreateRequest request) throws Exception{
-        return StoreProductDto.Response.fromEntity(repository.save(request.toEntity()));
+        StoreProductEntity save=request.toEntity();
+        save.setStatus(true);
+
+        return StoreProductDto.Response.fromEntity(repository.save(save));
     }
 
 
     public StoreProductDto.Response update(StoreProductDto.UpdateRequest request) throws Exception{
-        Optional<StoreProductEntity> optional=repository.findByIdAndStoreId(request.getId(), request.getStoreId());
-        if(optional.isEmpty()){
-            throw new BaseException(ErrorCode.RESPONSE_FAIL_UPDATE);
-        }
-        return StoreProductDto.Response.fromEntity(repository.save(request.toEntity()));
+        StoreProductEntity pre=repository.findByIdAndStoreId(request.getId(), request.getStoreId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_UPDATE) );
+        StoreProductEntity save=request.toEntity();
+        save.setStatus(pre.isStatus());
+        save.setProductMapCategoryList(pre.getProductMapCategoryList());
+        return StoreProductDto.Response.fromEntity(repository.save(save));
     }
 
     public String delete(StoreProductDto.DeleteRequest request) throws Exception{
@@ -53,9 +52,8 @@ public class StoreProductService {
         if(optional.isEmpty()){
             throw new BaseException(ErrorCode.RESPONSE_FAIL_DELETE);
         }
-
-        repository.delete(optional.get());
-
+        StoreProductEntity save = optional.get();
+        save.setStatus(false);
         return "200";
     }
 }

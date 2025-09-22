@@ -1,8 +1,6 @@
 package org.eppay.api.domain.file.service;
 
 
-import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +20,9 @@ import org.eppay.api.domain.store.repository.StoreRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import software.amazon.awssdk.core.sync.RequestBody;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 import java.io.IOException;
 import java.util.List;
@@ -33,7 +34,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class FileService {
     private final S3Config s3Config;
-
+    private final S3Client s3Client;
     private final ModelMapper modelMapper;
 //    public FileDto upload(MultipartFile file){
 //
@@ -51,21 +52,28 @@ public class FileService {
                 ? originalFilename.substring(originalFilename.lastIndexOf("."))
                 : "";
 
-        String dirName= FolderEnum.get(code);
-
+        String dirName = FolderEnum.get(code);
         String fileName = dirName + "/" + UUID.randomUUID() + fileExtension;
 
-        ObjectMetadata metadata = new ObjectMetadata();
-        metadata.setContentLength(multipartFile.getSize());
-        metadata.setContentType(multipartFile.getContentType());
+        // PutObjectRequest 생성
+        PutObjectRequest putObjectRequest = PutObjectRequest.builder()
+                .bucket(s3Config.getBucket())
+                .key(fileName)
+                .contentType(multipartFile.getContentType())
+                .contentLength(multipartFile.getSize())
+                .build();
 
-        AmazonS3Client s3Client=s3Config.amazonS3Client();
+        // S3 업로드
+        s3Client.putObject(putObjectRequest, RequestBody.fromInputStream(multipartFile.getInputStream(), multipartFile.getSize()));
+        // FileDto 생성
+        FileDto file = modelMapper.map(multipartFile, FileDto.class);
 
-        s3Client.putObject(s3Config.getBucket(), fileName, multipartFile.getInputStream(), metadata);
+        // URL 생성
+        String fileUrl = "https://" + s3Config.getBucket() + ".s3." + s3Config.getRegion() + ".amazonaws.com/" + fileName;
+        file.setImagePath(fileUrl);
 
-        FileDto file=modelMapper.map(multipartFile, FileDto.class);
-        file.setImagePath(s3Client.getUrl(s3Config.getBucket(), fileName).toString());
         return file;
+
     }
 
 }

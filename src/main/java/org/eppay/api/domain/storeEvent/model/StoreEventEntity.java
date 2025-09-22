@@ -4,11 +4,11 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.eppay.api.common.model.BaseCommEntity;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 @Builder
 @Table(name = "store_event")
 public class StoreEventEntity extends BaseCommEntity {

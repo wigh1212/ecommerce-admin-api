@@ -13,19 +13,20 @@ import java.util.Comparator;
 import java.util.List;
 
 @OpenAPIDefinition(
-        info = @Info(title = "스테이모아 API 명세서",
-                description = "COMP322-team12 스테이모아 API 명세서",
+        info = @Info(title = "이커머스 프로젝트 어드민 API 명세서",
+                description = "이커머스 프로젝트 어드민 API 명세서",
                 version = "v1"))
 @RequiredArgsConstructor
 @Configuration
 public class SwaggerConfig {
     @Bean
     public GroupedOpenApi chatOpenApi() {
-        String[] paths = {"/v1/**"};
+//        String[] paths = {"/v1/**"};
 
         return GroupedOpenApi.builder()
-                .group("스테이모아 API v1")
-                .pathsToMatch(paths)
+                .group("이커머스 API v1")
+                .pathsToMatch("/**")
+                .packagesToScan("org.eppay.api")
                 .build();
     }
 

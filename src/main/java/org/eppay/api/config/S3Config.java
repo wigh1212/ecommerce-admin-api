@@ -1,15 +1,18 @@
 package org.eppay.api.config;
 
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import lombok.Getter;
 import lombok.Setter;
+import org.jasypt.encryption.StringEncryptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.s3.S3Client;
 
 
 //aws.s3.key=
@@ -22,27 +25,40 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @Getter
 @Setter
-@ConfigurationProperties(prefix = "aws.s3")
+//@ConfigurationProperties(prefix = "aws.s3")
 public class S3Config {
 
-    @Value("key")
-    String key;
+    // application.properties에서 그대로 읽음 (암호화된 값)
+    @Value("${aws.s3.key}")
+    private String key;
 
-    @Value("secret")
-    String secret;
+    @Value("${aws.s3.secret}")
+    private String secret;
 
-    @Value("bucket")
-    String bucket;
+    @Value("${aws.s3.bucket}")
+    private String bucket;
 
-    @Value("region")
-    String region;
+    @Value("${aws.s3.region}")
+    private String region;
+
+    @Value("${spring.datasource.username}")
+    private String dbname;
+
+    @Autowired
+    private StringEncryptor encryptor;
+
+
 
     @Bean
-    public AmazonS3Client amazonS3Client() {
-        BasicAWSCredentials awsCreds = new BasicAWSCredentials(key, secret);
-        return (AmazonS3Client) AmazonS3ClientBuilder.standard()
-                .withRegion(region)
-                .withCredentials(new AWSStaticCredentialsProvider(awsCreds))
+    public S3Client s3Client() {
+        return S3Client.builder()
+                .region(Region.of(region))
+                .credentialsProvider(
+                        StaticCredentialsProvider.create(
+                                AwsBasicCredentials.create(key, secret)
+                        )
+                )
                 .build();
     }
+
 }

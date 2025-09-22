@@ -26,8 +26,10 @@ public class SecurityConfig {
     private final AuthenticationProvider authenticationProvider;
 //"/api/v1/qr/**"
 //    private static final String[] IGNORE_PAGES = {"favicon.ico","/error","/api/v1/auth/**","/api/v1/papago/**","/api/v1/qr/**"}; // 제외할 경로
-    private static final String[] BASE_PAGES = {"/ws/**","/api/v1/admin/login","/api/v1/admin"};
-//    private static final String[] MASTER_PAGES = { "/api/v1/baseStoreDivision/**"}; // 마스터 경로
+    private static final String[] BASE_PAGES = {"/ws/**","/api/v1/admin/login","/api/v1/admin","/v3/**"};
+    private static final String[] SWAGGER_PAGES = {"/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html", "/swagger-resources/**", "/webjars/**"};
+
+    //    private static final String[] MASTER_PAGES = { "/api/v1/baseStoreDivision/**"}; // 마스터 경로
 //    private static final String[] PARTNER_PAGES = { "/api/v1/baseWorks/**", "/api/v1/baseStoreDivision/**"}; // 파트너 경로
 //    private static final String[] HOTEL_PAGES = {"/api/v1/order/hotel/**"}; // 호텔 경로
 //    private static final String[] STORE_PAGES = {"/api/v1/order/store/**"}; // 매장 경로
@@ -42,10 +44,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                                 .requestMatchers( BASE_PAGES).permitAll()      // 제외 페이지
-//                                .requestMatchers( BASE_PAGES ).permitAll()
-//                                .requestMatchers( MASTER_PAGES ).hasAnyRole(AdminTypeEnum.ADMIN_TYPE_MASTER.getCode(), AdminTypeEnum.ADMIN_TYPE_PARTNER.getCode())    // 마스터,파트너 권한
-//                                .requestMatchers( MASTER_AND_HOTEL_PAGES ).hasAnyRole(AdminTypeEnum.ADMIN_TYPE_HOTEL.getCode(),AdminTypeEnum.ADMIN_TYPE_MASTER.getCode(),AdminTypeEnum.ADMIN_TYPE_PARTNER.getCode())    // 마스터,호텔권한,마스터
-//                                .requestMatchers( HOTEL_PAGES ).hasAnyRole(AdminTypeEnum.ADMIN_TYPE_HOTEL.getCode())    // 매장 권한
+                                .requestMatchers(SWAGGER_PAGES).permitAll()
                                 .anyRequest().authenticated()                     // 토큰체크
 
                 )

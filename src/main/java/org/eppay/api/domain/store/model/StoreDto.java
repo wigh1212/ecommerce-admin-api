@@ -1,10 +1,15 @@
 package org.eppay.api.domain.store.model;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
-@Data
 public class StoreDto {
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class Common {
         private String name;
         private String businessNumber;
@@ -13,7 +18,6 @@ public class StoreDto {
         private String email;
         private String address;
         private String image;
-        private String status;
 
         public StoreEntity toEntity(Long id) {
             return StoreEntity.builder()
@@ -24,17 +28,22 @@ public class StoreDto {
                     .email(this.email)
                     .address(this.address)
                     .image(this.image)
-                    .status(this.status)
                     .build();
         }
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class SearchRequest extends Common {
         private Long id;
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class CreateRequest extends Common {
         private Long id;
 
@@ -43,7 +52,10 @@ public class StoreDto {
         }
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class UpdateRequest extends Common {
         private Long id;
 
@@ -54,31 +66,39 @@ public class StoreDto {
         }
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class Response extends Common {
         private Long id;
 
         public static Response fromEntity(StoreEntity entity) {
-            Response response = new Response();
-            response.setId(entity.getId());
-            response.setName(entity.getName());
-            response.setAddress(entity.getAddress());
-            response.setBusinessNumber(entity.getBusinessNumber());
-            response.setEmail(entity.getEmail());
-            response.setImage(entity.getImage());
-            response.setPhone(entity.getPhone());
-            response.setStatus(entity.getStatus());
-            return response;
+            return Response.builder()
+                    .id(entity.getId())
+                    .name(entity.getName())
+                    .businessNumber(entity.getBusinessNumber())
+                    .phone(entity.getPhone())
+                    .email(entity.getEmail())
+                    .address(entity.getAddress())
+                    .image(entity.getImage())
+                    .build();
+
         }
     }
 
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class DeleteRequest {
         private Long id;
     }
 
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class Custom extends Common {
         private Long id;
 

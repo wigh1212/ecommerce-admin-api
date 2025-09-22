@@ -58,6 +58,10 @@ dependencies {
 	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
 	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 
+
+	//페이지 연동
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
 	//값 검사
 	implementation 'org.apache.commons:commons-lang3:3.12.0'
 
@@ -70,17 +74,13 @@ dependencies {
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
 	// aws s3 이미지 추가
-	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '2.2.6.RELEASE'
-
-//    implementation 'net.rakugakibox.util:yaml-resource-bundle:1.1'
+	implementation 'io.awspring.cloud:spring-cloud-aws-starter-s3:3.0.0'
+	implementation 'software.amazon.awssdk:s3:2.25.62'
 
 	testImplementation 'org.mockito:mockito-core'
 	testImplementation 'org.mockito:mockito-junit-jupiter'
 
-//    implementation 'io.springfox:springfox-swagger-ui:3.0.0'
-//    implementation 'io.springfox:springfox-boot-starter:3.0.0'
 
-	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0' // Version updated for Spring Boot 3
 	implementation 'org.jsoup:jsoup:1.17.2'
 
 	implementation group: 'org.json', name: 'json', version: '20230227'
@@ -98,6 +98,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
 
 	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
+
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0'
 
 }
 

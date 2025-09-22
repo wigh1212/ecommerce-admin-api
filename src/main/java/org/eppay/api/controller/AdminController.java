@@ -1,5 +1,7 @@
 package org.eppay.api.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.eppay.api.domain.admin.model.AdminDto;
 import org.eppay.api.domain.admin.service.AdminService;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.eppay.api.common.enums.SuccessCode;
 import org.eppay.api.common.response.CommonResponse;
 
+@Tag(name = "xxx", description = "xxx")
 @RestController
 @RequestMapping("/api/v1/admin")
 @RequiredArgsConstructor
@@ -39,7 +42,7 @@ public class AdminController {
         return CommonResponse.success(service.delete(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }
 
-
+    @Operation(summary = "로그인", description = "로그인")
     @PostMapping("/login")
     public CommonResponse login(@RequestBody AdminDto.login request) throws Exception {
         return CommonResponse.success(service.login(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
