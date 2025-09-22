@@ -54,13 +54,13 @@ public class StoreService {
 
     @Transactional
     public StoreDto.Response create(StoreDto.CreateRequest request) throws Exception{
-        Optional<StoreEntity> optional = repository.findByBusinessNumber(request.getBusinessNumber());
-        if(optional.isPresent()){
+        if(repository.existsByBusinessNumber(request.getBusinessNumber())){
             throw new BaseException(ErrorCode.EXIST_BUSINESS_NUMBER);
         }
-        StoreEntity save=request.toEntity();
-        save.setStatus(true);
-        StoreDto.Response saveStore=StoreDto.Response.fromEntity(repository.save(save));
+        
+        StoreEntity storeEntity=request.toEntity();
+        storeEntity.setStatus(true);
+        StoreDto.Response saveStore=StoreDto.Response.fromEntity(repository.save(storeEntity));
 
         AdminDto.CreateRequest admin=new AdminDto.CreateRequest();
         admin.setPassword("0000");
@@ -97,4 +97,5 @@ public class StoreService {
 
         return "200";
     }
+
 }

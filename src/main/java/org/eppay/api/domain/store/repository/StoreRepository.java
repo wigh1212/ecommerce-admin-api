@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface StoreRepository extends JpaRepository<StoreEntity,Long> {
     Optional<StoreEntity> findByBusinessNumber(String businessNumber);
 
+    boolean existsByBusinessNumber(String businessNumber);
 
     @Query("SELECT e FROM StoreEntity e JOIN FETCH e.storeProductList where e.id=:id ")
     StoreEntity getStoreAndProducts(@Param("id") Long id);

@@ -37,8 +37,6 @@ public class StoreProductMapCategoryService {
 
         List<StoreProductEntity> products = storeProductRepository.findAllByIdInAndStoreId(request.getStoreProductIdList(), storeProductCategoryEntity.getStoreId());
 
-        System.out.println("objects : "+objectMapper.writeValueAsString(products));
-
         products.forEach(storeProductCategoryEntity::addProduct);
 
         return "200";
