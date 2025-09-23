@@ -1,10 +1,11 @@
-package org.eppay.api.domain.storeProduct.model;
+package org.eppay.api.domain.storeProductOption.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.eppay.api.common.model.BaseCommEntity;
 import org.eppay.api.domain.storeProductCategoryRel.model.StoreProductCategoryRelEntity;
+import org.eppay.api.domain.storeProductOptionItem.model.StoreProductOptionItemEntity;
 import org.eppay.api.domain.storeProductOptionRel.model.StoreProductOptionRelEntity;
 
 import java.math.BigDecimal;
@@ -17,8 +18,8 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Builder
-@Table(name = "store_product")
-public class StoreProductEntity extends BaseCommEntity {
+@Table(name = "store_product_option")
+public class StoreProductOptionEntity extends BaseCommEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,20 +29,20 @@ public class StoreProductEntity extends BaseCommEntity {
     private Long storeId;
     @Column(name = "name")
     private String name;
-    @Column(name = "amount")
-    private BigDecimal amount;
-    @Column(name = "image")
-    private String image;
-    @Column(name = "info")
-    private String info;
+    @Column(name = "required")
+    private boolean required;
+    @Column(name = "min_select_count")
+    private int minSelectCount;
+    @Column(name = "max_select_count")
+    private int maxSelectCount;
     @Column(name="status")
     private boolean status;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "storeProduct", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<StoreProductCategoryRelEntity> storeProductCategoryRelList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "storeProduct", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "storeProductOption", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<StoreProductOptionRelEntity> storeProductOptionRelList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "storeProductOption", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<StoreProductOptionItemEntity> storeProductOptionItemList = new ArrayList<>();
 
 }

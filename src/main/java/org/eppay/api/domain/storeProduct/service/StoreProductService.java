@@ -40,6 +40,7 @@ public class StoreProductService {
         StoreProductEntity save=request.toEntity();
         save.setStatus(pre.isStatus());
         save.setStoreProductCategoryRelList(pre.getStoreProductCategoryRelList());
+        save.setStoreProductOptionRelList(pre.getStoreProductOptionRelList());
         return StoreProductDto.Response.fromEntity(repository.save(save));
     }
 

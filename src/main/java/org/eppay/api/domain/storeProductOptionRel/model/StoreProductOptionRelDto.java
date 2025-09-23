@@ -1,21 +1,15 @@
-package org.eppay.api.domain.storeProduct.model;
+package org.eppay.api.domain.storeProductOptionRel.model;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import org.eppay.api.domain.storeProductCategoryRel.model.StoreProductCategoryRelDto;
-import org.eppay.api.domain.storeProductOptionRel.model.StoreProductOptionRelDto;
+import org.eppay.api.domain.storeProduct.model.StoreProductDto;
 
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Data
-public class StoreProductDto {
+public class StoreProductOptionRelDto {
     @Data
     @SuperBuilder
     @NoArgsConstructor
@@ -23,25 +17,19 @@ public class StoreProductDto {
 
         @NotNull(message = "storeId는 필수 입니다.")
         private Long storeId;
-        private String name;
-        private BigDecimal amount;
-        private String image;
-        private String info;
-        @Builder.Default
-        private final boolean status=true;
+        private Long storeProductId;
+        private Long storeProductOptionId;
 
-        public StoreProductEntity toEntity(Long id) {
-            return StoreProductEntity.builder()
+        public StoreProductOptionRelEntity toEntity(Long id) {
+            return StoreProductOptionRelEntity.builder()
                     .id(id)
                     .storeId(this.storeId)
-                    .name(this.name)
-                    .amount(this.amount)
-                    .image(this.image)
-                    .info(this.info)
-                    .status(this.status)
+                    .storeProductId(this.storeProductId)
+                    .storeProductOptionId(this.storeProductOptionId)
                     .build();
         }
     }
+
     @EqualsAndHashCode(callSuper = true)
     @Data
     @SuperBuilder
@@ -49,18 +37,16 @@ public class StoreProductDto {
     public static class SearchRequest extends Common {
         private Long id;
     }
-    @EqualsAndHashCode(callSuper = true)
+
     @Data
     @SuperBuilder
     @NoArgsConstructor
-    public static class CreateRequest extends Common {
+    public static class CreateRequest {
         private Long id;
+        private Long storeProductCategoryId;
+        private List<Long> storeProductIdList;
 
-        public StoreProductEntity toEntity() {
-            return super.toEntity(id);
-        }
     }
-
     @EqualsAndHashCode(callSuper = true)
     @Data
     @SuperBuilder
@@ -68,7 +54,7 @@ public class StoreProductDto {
     public static class UpdateRequest extends Common {
         private Long id;
 
-        public StoreProductEntity toEntity() {
+        public StoreProductOptionRelEntity toEntity() {
             return super.toEntity(id);
         }
     }
@@ -78,18 +64,16 @@ public class StoreProductDto {
     @NoArgsConstructor
     public static class Response extends Common {
         private Long id;
-        private List<StoreProductOptionRelDto.Response> storeProductOptionRelList;
-        public static Response fromEntity(StoreProductEntity entity) {
+        private StoreProductDto.Response storeProduct;
+        public static Response fromEntity(StoreProductOptionRelEntity entity) {
             return Response.builder()
                     .id(entity.getId())
                     .storeId(entity.getStoreId())
-                    .name(entity.getName())
-                    .amount(entity.getAmount())
-                    .image(entity.getImage())
-                    .info(entity.getInfo())
-                    .status(entity.isStatus())
-                    .storeProductOptionRelList(entity.getStoreProductOptionRelList().stream().map(StoreProductOptionRelDto.Response::fromEntity).collect(Collectors.toList()))
+                    .storeProductId(entity.getStoreProductId())
+                    .storeProductOptionId(entity.getStoreProductOptionId())
+                    .storeProduct(StoreProductDto.Response.fromEntity(entity.getStoreProduct()))
                     .build();
+
         }
     }
     @EqualsAndHashCode(callSuper = true)
@@ -107,7 +91,7 @@ public class StoreProductDto {
     public static class Custom extends Common {
         private Long id;
 
-        public StoreProductEntity toEntity() {
+        public StoreProductOptionRelEntity toEntity() {
             return super.toEntity(id);
         }
     }

@@ -1,21 +1,15 @@
-package org.eppay.api.domain.storeProduct.model;
+package org.eppay.api.domain.storeProductOptionItem.model;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import org.eppay.api.domain.storeProductCategoryRel.model.StoreProductCategoryRelDto;
-import org.eppay.api.domain.storeProductOptionRel.model.StoreProductOptionRelDto;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Data
-public class StoreProductDto {
+public class StoreProductOptionItemDto {
     @Data
     @SuperBuilder
     @NoArgsConstructor
@@ -23,22 +17,17 @@ public class StoreProductDto {
 
         @NotNull(message = "storeId는 필수 입니다.")
         private Long storeId;
+        private Long storeProductOptionId;
         private String name;
         private BigDecimal amount;
-        private String image;
-        private String info;
-        @Builder.Default
-        private final boolean status=true;
 
-        public StoreProductEntity toEntity(Long id) {
-            return StoreProductEntity.builder()
+        public StoreProductOptionItemEntity toEntity(Long id) {
+            return StoreProductOptionItemEntity.builder()
                     .id(id)
                     .storeId(this.storeId)
+                    .storeProductOptionId(this.storeProductOptionId)
                     .name(this.name)
                     .amount(this.amount)
-                    .image(this.image)
-                    .info(this.info)
-                    .status(this.status)
                     .build();
         }
     }
@@ -56,7 +45,7 @@ public class StoreProductDto {
     public static class CreateRequest extends Common {
         private Long id;
 
-        public StoreProductEntity toEntity() {
+        public StoreProductOptionItemEntity toEntity() {
             return super.toEntity(id);
         }
     }
@@ -68,7 +57,7 @@ public class StoreProductDto {
     public static class UpdateRequest extends Common {
         private Long id;
 
-        public StoreProductEntity toEntity() {
+        public StoreProductOptionItemEntity toEntity() {
             return super.toEntity(id);
         }
     }
@@ -78,17 +67,14 @@ public class StoreProductDto {
     @NoArgsConstructor
     public static class Response extends Common {
         private Long id;
-        private List<StoreProductOptionRelDto.Response> storeProductOptionRelList;
-        public static Response fromEntity(StoreProductEntity entity) {
+
+        public static Response fromEntity(StoreProductOptionItemEntity entity) {
             return Response.builder()
                     .id(entity.getId())
                     .storeId(entity.getStoreId())
+                    .storeProductOptionId(entity.getStoreProductOptionId())
                     .name(entity.getName())
                     .amount(entity.getAmount())
-                    .image(entity.getImage())
-                    .info(entity.getInfo())
-                    .status(entity.isStatus())
-                    .storeProductOptionRelList(entity.getStoreProductOptionRelList().stream().map(StoreProductOptionRelDto.Response::fromEntity).collect(Collectors.toList()))
                     .build();
         }
     }
@@ -107,7 +93,7 @@ public class StoreProductDto {
     public static class Custom extends Common {
         private Long id;
 
-        public StoreProductEntity toEntity() {
+        public StoreProductOptionItemEntity toEntity() {
             return super.toEntity(id);
         }
     }

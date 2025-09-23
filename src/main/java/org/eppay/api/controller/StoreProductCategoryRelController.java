@@ -10,18 +10,18 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/store")
 @RequiredArgsConstructor
-public class StoreProductMapCategoryController {
+public class StoreProductCategoryRelController {
 
     private final StoreProductCategoryRelService service;
 
 
-    @PostMapping("/{storeId}/product/map/category")
+    @PostMapping("/{storeId}/product/category/rel")
     public CommonResponse create(@RequestBody StoreProductCategoryRelDto.CreateRequest request) throws Exception {
         return CommonResponse.success(service.create(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }
 
 
-    @DeleteMapping("/{storeId}/product/map/category/{id}")
+    @DeleteMapping("/{storeId}/product/category/rel/{id}")
     public CommonResponse delete( StoreProductCategoryRelDto.DeleteRequest request) throws Exception {
         return CommonResponse.success(service.delete(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }
