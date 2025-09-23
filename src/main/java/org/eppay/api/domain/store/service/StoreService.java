@@ -44,11 +44,7 @@ public class StoreService {
     }
 
     public StoreDto.Response getOne(StoreDto.SearchRequest request) throws Exception{
-        Optional<StoreEntity> optional=repository.findById(request.getId());
-        if(optional.isEmpty()){
-            throw new BaseException(ErrorCode.RESPONSE_FAIL_SEARCH);
-        }
-        return StoreDto.Response.fromEntity(optional.get());
+        return StoreDto.Response.fromEntity(repository.findById(request.getId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_SEARCH)));
     }
 
 
@@ -57,10 +53,8 @@ public class StoreService {
         if(repository.existsByBusinessNumber(request.getBusinessNumber())){
             throw new BaseException(ErrorCode.EXIST_BUSINESS_NUMBER);
         }
-        
-        StoreEntity storeEntity=request.toEntity();
-        storeEntity.setStatus(true);
-        StoreDto.Response saveStore=StoreDto.Response.fromEntity(repository.save(storeEntity));
+
+        StoreDto.Response saveStore=StoreDto.Response.fromEntity(repository.save(request.toEntity()));
 
         AdminDto.CreateRequest admin=new AdminDto.CreateRequest();
         admin.setPassword("0000");
@@ -76,25 +70,27 @@ public class StoreService {
 
 
     public StoreDto.Response update(StoreDto.UpdateRequest request) throws Exception{
-        Optional<StoreEntity> optional=repository.findById(request.getId());
-        if(optional.isEmpty()){
-            throw new BaseException(ErrorCode.RESPONSE_FAIL_UPDATE);
-        }
-        StoreEntity entity=optional.get();
-        request.setBusinessNumber(entity.getBusinessNumber());
-
+        StoreEntity storeEntity=repository.findById(request.getId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_UPDATE));
+        request.setBusinessNumber(storeEntity.getBusinessNumber());
         return StoreDto.Response.fromEntity(repository.save(request.toEntity()));
     }
 
+    @Transactional
     public String delete(StoreDto.DeleteRequest request) throws Exception{
+        LoginAccount account=loginService.getAccount();
+        if(account.getType().equals("ADMIN")){
 
-        Optional<StoreEntity> optional=repository.findById(request.getId());
-        if(optional.isEmpty()){
-            throw new BaseException(ErrorCode.RESPONSE_FAIL_DELETE);
+            AdminDto.DeleteRequest adminDeleteDto=new AdminDto.DeleteRequest();
+            adminDeleteDto.setStoreId(request.getId());
+            adminService.deleteStore(adminDeleteDto);
+
+            StoreEntity storeEntity=repository.findById(request.getId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_DELETE));
+            storeEntity.setStatus(false);
+            repository.save(storeEntity);
         }
-
-        repository.delete(optional.get());
-
+        else{
+            throw new BaseException(ErrorCode.ACCESS_DENIED);
+        }
         return "200";
     }
 

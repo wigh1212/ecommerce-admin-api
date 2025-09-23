@@ -33,7 +33,7 @@ public class StoreProductCategoryEntity extends BaseCommEntity {
     private Long parentId;
 
     @Column(name = "status")
-    private Boolean status;
+    private boolean status;
 
 
     @JsonIgnore

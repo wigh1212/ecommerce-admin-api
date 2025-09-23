@@ -48,13 +48,7 @@ public class AdminService {
 
     public AdminDto.Response create(AdminDto.CreateRequest request) throws Exception{
         request.setPassword(passwordEncoder.encode(request.getPassword()));
-        Optional<AdminEntity> optional = repository.findByUserName(request.getName());
-        if(optional.isPresent()){
-            throw new BaseException(ErrorCode.RESPONSE_FAIL_INSERT);
-        }
-
-//        modelMapper.map(repository.save(request.toEntity()),AdminDto.Response.class);
-
+         repository.findByUserName(request.getName()).ifPresent(i ->  {throw new BaseException(ErrorCode.RESPONSE_FAIL_DUPLICATION);} );
         return AdminDto.Response.fromEntity(repository.save(request.toEntity()));
     }
 
@@ -70,16 +64,10 @@ public class AdminService {
         return AdminDto.Response.fromEntity(repository.save(request.toEntity()));
     }
 
-    public String delete(AdminDto.DeleteRequest request) throws Exception{
-
-        Optional<AdminEntity> optional=repository.findById(request.getId());
-        if(optional.isEmpty()){
-            throw new BaseException(ErrorCode.RESPONSE_FAIL_DELETE);
-        }
-
-        repository.delete(optional.get());
-
-        return "200";
+    public void deleteStore(AdminDto.DeleteRequest request) throws Exception{
+       AdminEntity adminEntity=repository.findByStoreId(request.getStoreId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_DELETE));
+       adminEntity.setStatus(false);
+       repository.save(adminEntity);
     }
 
     public String login(AdminDto.login request) throws Exception{
@@ -89,7 +77,7 @@ public class AdminService {
                 request.getPassword()
         ));
 
-        AdminEntity admin=repository.findByUserName(request.getUserName()).get();
+        AdminEntity admin=repository.findByUserNameAndStatus(request.getUserName(),true).orElseThrow(() ->  new BaseException(ErrorCode.AUTH_ACCOUNT_SUSPENDED));
 
         return jwtTokenUtil.generateToken(admin);
     }

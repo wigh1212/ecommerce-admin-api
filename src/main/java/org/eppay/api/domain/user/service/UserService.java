@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.eppay.api.common.enums.ErrorCode;
+import org.eppay.api.common.enums.SuccessCode;
 import org.eppay.api.common.error.BaseException;
 import org.eppay.api.common.loginAccount.LoginAccount;
 import org.eppay.api.common.loginAccount.LoginService;
@@ -29,11 +30,7 @@ public class UserService {
     }
 
     public UserDto.Response getOne(UserDto.SearchRequest request) throws Exception{
-        Optional<UserEntity> optional=repository.findById(request.getId());
-        if(optional.isEmpty()){
-            throw new BaseException(ErrorCode.RESPONSE_FAIL_SEARCH);
-        }
-        return UserDto.Response.fromEntity(optional.get());
+        return UserDto.Response.fromEntity(repository.findById(request.getId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_SEARCH)));
     }
 
 
@@ -43,23 +40,14 @@ public class UserService {
 
 
     public UserDto.Response update(UserDto.UpdateRequest request) throws Exception{
-        Optional<UserEntity> optional=repository.findById(request.getId());
-        if(optional.isEmpty()){
-            throw new BaseException(ErrorCode.RESPONSE_FAIL_UPDATE);
-        }
-        request.setUserName(optional.get().getUserName());
-        request.setPassword(optional.get().getPassword());
+        UserEntity userEntity=repository.findById(request.getId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_UPDATE));
+        request.setUserName(userEntity.getUserName());
+        request.setPassword(userEntity.getPassword());
         return UserDto.Response.fromEntity(repository.save(request.toEntity()));
     }
 
     public String delete(UserDto.DeleteRequest request) throws Exception{
-        Optional<UserEntity> optional=repository.findById(request.getId());
-        if(optional.isEmpty()){
-            throw new BaseException(ErrorCode.RESPONSE_FAIL_DELETE);
-        }
-
-        repository.delete(optional.get());
-
+        repository.delete(repository.findById(request.getId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_DELETE)));
         return "200";
     }
 }

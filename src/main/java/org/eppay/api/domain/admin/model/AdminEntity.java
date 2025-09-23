@@ -36,6 +36,8 @@ public class AdminEntity implements UserDetails {
     private String type;
     @Column(name = "store_id")
     private Long storeId;
+    @Column(name = "status")
+    private boolean status;
 
 
 

@@ -37,10 +37,10 @@ public class AdminController {
         return CommonResponse.success(service.update(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }
 
-    @DeleteMapping("/{id}")
-    public CommonResponse delete( AdminDto.DeleteRequest request) throws Exception {
-        return CommonResponse.success(service.delete(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
-    }
+//    @DeleteMapping("/{id}")
+//    public CommonResponse delete( AdminDto.DeleteRequest request) throws Exception {
+//        return CommonResponse.success(service.delete(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
+//    }
 
     @Operation(summary = "로그인", description = "로그인")
     @PostMapping("/login")

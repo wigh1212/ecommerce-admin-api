@@ -24,6 +24,8 @@ public class StoreProductCategoryDto {
         private String name;
         private String description;
         private Long parentId;
+        @Builder.Default
+        private boolean statue=true;
 
         public StoreProductCategoryEntity toEntity(Long id) {
             return StoreProductCategoryEntity.builder()
@@ -32,6 +34,7 @@ public class StoreProductCategoryDto {
                     .name(this.name)
                     .description(this.description)
                     .parentId(this.parentId)
+                    .status(this.statue)
                     .build();
         }
     }
@@ -82,6 +85,7 @@ public class StoreProductCategoryDto {
                     .name(entity.getName())
                     .description(entity.getDescription())
                     .parentId(entity.getParentId())
+                    .statue(entity.isStatus())
                     .storeProductMapCategoryList(entity.getStoreProductMapCategoryList().stream().map(StoreProductMapCategoryDto.Response::fromEntity).collect(Collectors.toList()))
                     .build();
 

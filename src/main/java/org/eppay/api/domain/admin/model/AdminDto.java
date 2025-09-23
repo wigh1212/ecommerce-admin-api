@@ -20,6 +20,7 @@ public class AdminDto {
         private String password;
         private String type;
         private Long storeId;
+        private boolean status=true;
 
         public AdminEntity toEntity(Long id) {
             return AdminEntity.builder()
@@ -30,6 +31,7 @@ public class AdminDto {
                     .displayName(this.getDisplayName())
                     .storeId(this.getStoreId())
                     .type(this.getType())
+                    .status(this.status)
                     .build();
         }
     }
@@ -76,15 +78,16 @@ public class AdminDto {
         private Long id;
 
         public static Response fromEntity(AdminEntity entity) {
-            Response response = new Response();
-            response.setId(entity.getId());
-            response.setUserName(entity.getUsername());
-            response.setName(entity.getName());
-            response.setPassword(entity.getPassword());
-            response.setDisplayName(entity.getDisplayName());
-            response.setStoreId(entity.getStoreId());
-            response.setType(entity.getType());
-            return response;
+            return Response.builder()
+                    .id(entity.getId())
+                    .userName(entity.getUsername())
+                    .name(entity.getName())
+                    .displayName(entity.getDisplayName())
+                    .storeId(entity.getStoreId())
+                    .type(entity.getType())
+                    .status(entity.isStatus())
+                    .build();
+
         }
     }
 
@@ -93,6 +96,7 @@ public class AdminDto {
     @NoArgsConstructor
     public static class DeleteRequest {
         private Long id;
+        private Long storeId;
     }
 
 

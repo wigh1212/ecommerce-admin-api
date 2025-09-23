@@ -18,6 +18,8 @@ public class StoreDto {
         private String email;
         private String address;
         private String image;
+        @Builder.Default
+        private boolean status=true;
 
         public StoreEntity toEntity(Long id) {
             return StoreEntity.builder()
@@ -28,6 +30,7 @@ public class StoreDto {
                     .email(this.email)
                     .address(this.address)
                     .image(this.image)
+                    .status(this.status)
                     .build();
         }
     }
@@ -82,6 +85,7 @@ public class StoreDto {
                     .email(entity.getEmail())
                     .address(entity.getAddress())
                     .image(entity.getImage())
+                    .status(entity.isStatus())
                     .build();
 
         }

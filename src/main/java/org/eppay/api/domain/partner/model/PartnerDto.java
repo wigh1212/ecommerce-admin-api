@@ -1,43 +1,34 @@
-package org.eppay.api.domain.storeProduct.model;
+package org.eppay.api.domain.partner.model;
 
 import jakarta.persistence.Column;
-import jakarta.validation.constraints.NotNull;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.math.BigDecimal;
-
-@Data
-public class StoreProductDto {
+public class PartnerDto {
     @Data
     @SuperBuilder
     @NoArgsConstructor
     public static class Common {
-
-        @NotNull(message = "storeId는 필수 입니다.")
-        private Long storeId;
         private String name;
-        private BigDecimal amount;
-        private String image;
-        private String info;
-        @Builder.Default
-        private final boolean status=true;
+        private String address;
+        private String addressDetail;
+        private String memo;
+        private boolean status;
 
-        public StoreProductEntity toEntity(Long id) {
-            return StoreProductEntity.builder()
+        public PartnerEntity toEntity(Long id) {
+            return PartnerEntity.builder()
                     .id(id)
-                    .storeId(this.storeId)
                     .name(this.name)
-                    .amount(this.amount)
-                    .image(this.image)
-                    .info(this.info)
                     .status(this.status)
+                    .memo(this.memo)
+                    .address(this.address)
+                    .addressDetail(this.addressDetail)
                     .build();
         }
     }
+
     @EqualsAndHashCode(callSuper = true)
     @Data
     @SuperBuilder
@@ -45,6 +36,7 @@ public class StoreProductDto {
     public static class SearchRequest extends Common {
         private Long id;
     }
+
     @EqualsAndHashCode(callSuper = true)
     @Data
     @SuperBuilder
@@ -52,7 +44,7 @@ public class StoreProductDto {
     public static class CreateRequest extends Common {
         private Long id;
 
-        public StoreProductEntity toEntity() {
+        public PartnerEntity toEntity() {
             return super.toEntity(id);
         }
     }
@@ -64,36 +56,38 @@ public class StoreProductDto {
     public static class UpdateRequest extends Common {
         private Long id;
 
-        public StoreProductEntity toEntity() {
+        public PartnerEntity toEntity() {
             return super.toEntity(id);
         }
     }
+
     @EqualsAndHashCode(callSuper = true)
     @Data
     @SuperBuilder
     @NoArgsConstructor
     public static class Response extends Common {
         private Long id;
-
-        public static Response fromEntity(StoreProductEntity entity) {
+        public static Response fromEntity(PartnerEntity entity) {
             return Response.builder()
                     .id(entity.getId())
-                    .storeId(entity.getStoreId())
                     .name(entity.getName())
-                    .amount(entity.getAmount())
-                    .image(entity.getImage())
-                    .info(entity.getInfo())
+                    .status(entity.isStatus())
+                    .memo(entity.getMemo())
+                    .address(entity.getAddress())
+                    .addressDetail(entity.getAddressDetail())
                     .status(entity.isStatus())
                     .build();
+
         }
     }
-    @EqualsAndHashCode(callSuper = true)
+
     @Data
     @SuperBuilder
     @NoArgsConstructor
-    public static class DeleteRequest extends Common{
+    public static class DeleteRequest {
         private Long id;
     }
+
 
     @EqualsAndHashCode(callSuper = true)
     @Data
@@ -102,7 +96,7 @@ public class StoreProductDto {
     public static class Custom extends Common {
         private Long id;
 
-        public StoreProductEntity toEntity() {
+        public PartnerEntity toEntity() {
             return super.toEntity(id);
         }
     }

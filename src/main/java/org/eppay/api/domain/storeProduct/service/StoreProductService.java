@@ -31,10 +31,7 @@ public class StoreProductService {
 
 
     public StoreProductDto.Response create(StoreProductDto.CreateRequest request) throws Exception{
-        StoreProductEntity save=request.toEntity();
-        save.setStatus(true);
-
-        return StoreProductDto.Response.fromEntity(repository.save(save));
+        return StoreProductDto.Response.fromEntity(repository.save(request.toEntity()));
     }
 
 
@@ -47,13 +44,9 @@ public class StoreProductService {
     }
 
     public String delete(StoreProductDto.DeleteRequest request) throws Exception{
-
-        Optional<StoreProductEntity> optional=repository.findByIdAndStoreId( request.getId(),request.getStoreId());
-        if(optional.isEmpty()){
-            throw new BaseException(ErrorCode.RESPONSE_FAIL_DELETE);
-        }
-        StoreProductEntity save = optional.get();
-        save.setStatus(false);
+        StoreProductEntity storeProductEntity=repository.findByIdAndStoreId( request.getId(),request.getStoreId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_DELETE) );
+        storeProductEntity.setStatus(false);
+        repository.save(storeProductEntity);
         return "200";
     }
 }

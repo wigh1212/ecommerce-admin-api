@@ -38,6 +38,7 @@ public class JwtTokenUtil {
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
 
         AdminEntity adminEntity = (AdminEntity) userDetails;
+        extraClaims.put("adminId",adminEntity.getId());
         extraClaims.put("username",adminEntity.getUsername());
         extraClaims.put("displayName",adminEntity.getDisplayName());
         extraClaims.put("name",adminEntity.getName());

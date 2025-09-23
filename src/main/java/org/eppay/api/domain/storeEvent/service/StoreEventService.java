@@ -23,8 +23,6 @@ public class StoreEventService {
 
     private final StoreEventRepository repository;
 
-    private final S3Config s3Config;
-
     private final ObjectMapper objectMapper;
 
     public List<StoreEventDto.Response> getList(StoreEventDto.SearchRequest request) throws Exception{
@@ -32,35 +30,20 @@ public class StoreEventService {
     }
 
     public StoreEventDto.Response getOne(StoreEventDto.SearchRequest request) throws Exception{
-        Optional<StoreEventEntity> optional=repository.findByIdAndStoreId(request.getId(),request.getStoreId());
-        if(optional.isEmpty()){
-            throw new BaseException(ErrorCode.RESPONSE_FAIL_SEARCH);
-        }
-        return StoreEventDto.Response.fromEntity(optional.get());
+        return StoreEventDto.Response.fromEntity(repository.findByIdAndStoreId(request.getId(),request.getStoreId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_SEARCH)));
     }
 
     public StoreEventDto.Response create(StoreEventDto.CreateRequest request) throws Exception{
         return StoreEventDto.Response.fromEntity(repository.save(request.toEntity()));
     }
     public StoreEventDto.Response update(StoreEventDto.UpdateRequest request) throws Exception{
-        Optional<StoreEventEntity> optional=repository.findByIdAndStoreId(request.getId(), request.getStoreId());
-        if(optional.isEmpty()){
-            throw new BaseException(ErrorCode.RESPONSE_FAIL_UPDATE);
-        }
+        StoreEventEntity storeEventEntity=repository.findByIdAndStoreId(request.getId(), request.getStoreId()).orElseThrow(()-> new BaseException(ErrorCode.RESPONSE_FAIL_UPDATE));
         return StoreEventDto.Response.fromEntity(repository.save(request.toEntity()));
     }
 
     public String delete(StoreEventDto.DeleteRequest request) throws Exception{
-
-        System.out.println("id:"+request.getId()+"storeid:"+request.getStoreId());
-
-        Optional<StoreEventEntity> optional=repository.findByIdAndStoreId( request.getId(),request.getStoreId());
-        if(optional.isEmpty()){
-            throw new BaseException(ErrorCode.RESPONSE_FAIL_DELETE);
-        }
-
-        repository.delete(optional.get());
-
+        StoreEventEntity storeEventEntity=repository.findByIdAndStoreId( request.getId(),request.getStoreId()).orElseThrow(()-> new BaseException(ErrorCode.RESPONSE_FAIL_DELETE));
+        repository.delete(storeEventEntity);
         return "200";
     }
 

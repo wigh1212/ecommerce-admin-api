@@ -7,8 +7,11 @@ import org.eppay.api.domain.admin.model.AdminEntity;
 import java.util.Optional;
 @Repository
 public interface AdminRepository extends JpaRepository<AdminEntity,Long> {
-
     public Optional<AdminEntity> findByUserName(String username);
+
+    public Optional<AdminEntity> findByStoreId(Long storeId);
+
+    public Optional<AdminEntity> findByUserNameAndStatus(String username,boolean status);
     public Optional<AdminEntity> findByName(String name);
     public boolean deleteByUserName(String username);
 }

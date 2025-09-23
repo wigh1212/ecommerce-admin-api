@@ -32,31 +32,24 @@ public class StoreProductCategoryService {
 
 
     public StoreProductCategoryDto.Response create(StoreProductCategoryDto.CreateRequest request) throws Exception{
-        StoreProductCategoryEntity save=request.toEntity();
-        save.setStatus(true);
-        return StoreProductCategoryDto.Response.fromEntity(repository.save(save));
+        return StoreProductCategoryDto.Response.fromEntity(repository.save(request.toEntity()));
     }
 
 
     public StoreProductCategoryDto.Response update(StoreProductCategoryDto.UpdateRequest request) throws Exception{
         StoreProductCategoryEntity pre=repository.findByIdAndStoreId(request.getId(), request.getStoreId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_UPDATE));
 
-        StoreProductCategoryEntity saveEntity=request.toEntity();
-        saveEntity.setStatus(pre.getStatus());
-        saveEntity.setStoreProductMapCategoryList(pre.getStoreProductMapCategoryList());
-        return StoreProductCategoryDto.Response.fromEntity(repository.save(saveEntity));
+        StoreProductCategoryEntity saveStoreProductCategoryEntity=request.toEntity();
+        saveStoreProductCategoryEntity.setStatus(pre.isStatus());
+        saveStoreProductCategoryEntity.setStoreProductMapCategoryList(pre.getStoreProductMapCategoryList());
+        return StoreProductCategoryDto.Response.fromEntity(repository.save(saveStoreProductCategoryEntity));
     }
 
     public String delete(StoreProductCategoryDto.DeleteRequest request) throws Exception{
 
-        Optional<StoreProductCategoryEntity> optional=repository.findByIdAndStoreId( request.getId(),request.getStoreId());
-        if(optional.isEmpty()){
-            throw new BaseException(ErrorCode.RESPONSE_FAIL_DELETE);
-        }
-
-        StoreProductCategoryEntity save = optional.get();
-        save.setStatus(false);
-
+        StoreProductCategoryEntity storeProductCategoryEntity=repository.findByIdAndStoreId( request.getId(),request.getStoreId()).orElseThrow(()-> new BaseException(ErrorCode.RESPONSE_FAIL_DELETE));
+        storeProductCategoryEntity.setStatus(false);
+        repository.save(storeProductCategoryEntity);
         return "200";
     }
 }

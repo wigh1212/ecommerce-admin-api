@@ -41,6 +41,7 @@ public enum ErrorCode {
     AUTH_TOKEN_EXPIRATION("3005","토큰 기한 만료"),
     AUTH_TOKEN_UNSUPPORTED("3006","지원되지 않는 JWT 형식"),
     AUTH_TOKEN_COMPACT("3007","JWT token compact of handler are invalid."),
+    AUTH_ACCOUNT_SUSPENDED("3008","정지된 계정입니다. 관리자에게 문의하세요."),
 
     //4000 시스템오류
     COMMON_SYSTEM_ERROR("4000","일시적인 오류가 발생했습니다. 잠시 후 다시 시도해주세요."), // 장애 상황
