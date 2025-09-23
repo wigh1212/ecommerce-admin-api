@@ -39,7 +39,7 @@ public class StoreProductService {
         StoreProductEntity pre=repository.findByIdAndStoreId(request.getId(), request.getStoreId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_UPDATE) );
         StoreProductEntity save=request.toEntity();
         save.setStatus(pre.isStatus());
-        save.setProductMapCategoryList(pre.getProductMapCategoryList());
+        save.setStoreProductCategoryRelList(pre.getStoreProductCategoryRelList());
         return StoreProductDto.Response.fromEntity(repository.save(save));
     }
 

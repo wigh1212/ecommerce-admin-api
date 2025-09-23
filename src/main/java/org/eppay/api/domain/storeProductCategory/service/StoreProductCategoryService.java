@@ -41,7 +41,7 @@ public class StoreProductCategoryService {
 
         StoreProductCategoryEntity saveStoreProductCategoryEntity=request.toEntity();
         saveStoreProductCategoryEntity.setStatus(pre.isStatus());
-        saveStoreProductCategoryEntity.setStoreProductMapCategoryList(pre.getStoreProductMapCategoryList());
+        saveStoreProductCategoryEntity.setStoreProductCategoryRelList(pre.getStoreProductCategoryRelList());
         return StoreProductCategoryDto.Response.fromEntity(repository.save(saveStoreProductCategoryEntity));
     }
 

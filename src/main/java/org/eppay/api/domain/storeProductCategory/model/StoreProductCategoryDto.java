@@ -1,15 +1,13 @@
 package org.eppay.api.domain.storeProductCategory.model;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import org.eppay.api.domain.storeProductMapCategory.model.StoreProductMapCategoryDto;
+import org.eppay.api.domain.storeProductCategoryRel.model.StoreProductCategoryRelDto;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -77,7 +75,7 @@ public class StoreProductCategoryDto {
     @NoArgsConstructor
     public static class Response extends Common {
         private Long id;
-        private List<StoreProductMapCategoryDto.Response> storeProductMapCategoryList;
+        private List<StoreProductCategoryRelDto.Response> storeProductMapCategoryList;
         public static Response fromEntity(StoreProductCategoryEntity entity) {
             return Response.builder()
                     .id(entity.getId())
@@ -86,7 +84,7 @@ public class StoreProductCategoryDto {
                     .description(entity.getDescription())
                     .parentId(entity.getParentId())
                     .statue(entity.isStatus())
-                    .storeProductMapCategoryList(entity.getStoreProductMapCategoryList().stream().map(StoreProductMapCategoryDto.Response::fromEntity).collect(Collectors.toList()))
+                    .storeProductMapCategoryList(entity.getStoreProductCategoryRelList().stream().map(StoreProductCategoryRelDto.Response::fromEntity).collect(Collectors.toList()))
                     .build();
 
         }

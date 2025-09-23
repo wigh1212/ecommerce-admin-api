@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.eppay.api.common.model.BaseCommEntity;
-import org.eppay.api.domain.storeProductMapCategory.model.StoreProductMapCategoryEntity;
+import org.eppay.api.domain.storeProductCategoryRel.model.StoreProductCategoryRelEntity;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -38,12 +38,12 @@ public class StoreProductEntity extends BaseCommEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "storeProduct", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<StoreProductMapCategoryEntity> productMapCategoryList = new ArrayList<>();
+    private List<StoreProductCategoryRelEntity> storeProductCategoryRelList = new ArrayList<>();
 
     // 연관관계 편의 메서드
-    public void addMap(StoreProductMapCategoryEntity storeProductMapCategory) {
-        productMapCategoryList.add(storeProductMapCategory);
-        storeProductMapCategory.setStoreProduct(this);
+    public void addMap(StoreProductCategoryRelEntity storeProductCategoryRel) {
+        storeProductCategoryRelList.add(storeProductCategoryRel);
+        storeProductCategoryRel.setStoreProduct(this);
     }
 
 }

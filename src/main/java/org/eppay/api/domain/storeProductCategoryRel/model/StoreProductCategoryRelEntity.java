@@ -1,4 +1,4 @@
-package org.eppay.api.domain.storeProductMapCategory.model;
+package org.eppay.api.domain.storeProductCategoryRel.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -13,8 +13,8 @@ import org.eppay.api.domain.storeProductCategory.model.StoreProductCategoryEntit
 @AllArgsConstructor
 @Data
 @Builder
-@Table(name = "store_product_map_category")
-public class StoreProductMapCategoryEntity extends BaseCommEntity {
+@Table(name = "store_product_category_rel")
+public class StoreProductCategoryRelEntity extends BaseCommEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

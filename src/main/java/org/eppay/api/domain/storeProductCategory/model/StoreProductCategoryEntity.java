@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.eppay.api.common.model.BaseCommEntity;
 import org.eppay.api.domain.storeProduct.model.StoreProductEntity;
-import org.eppay.api.domain.storeProductMapCategory.model.StoreProductMapCategoryEntity;
+import org.eppay.api.domain.storeProductCategoryRel.model.StoreProductCategoryRelEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,27 +38,27 @@ public class StoreProductCategoryEntity extends BaseCommEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "storeProductCategory", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<StoreProductMapCategoryEntity> storeProductMapCategoryList = new ArrayList<>();
+    private List<StoreProductCategoryRelEntity> storeProductCategoryRelList = new ArrayList<>();
 
     public void addProduct(StoreProductEntity product) {
-        boolean exists = this.storeProductMapCategoryList.stream()
+        boolean exists = this.storeProductCategoryRelList.stream()
                 .anyMatch(map -> map.getStoreProduct().getId().equals(product.getId()));
 
         if (!exists) {
-            StoreProductMapCategoryEntity map = StoreProductMapCategoryEntity.builder()
+            StoreProductCategoryRelEntity rel = StoreProductCategoryRelEntity.builder()
                     .storeId(this.storeId)
                     .storeProduct(product)
                     .storeProductCategory(this)
                     .build();
-            this.storeProductMapCategoryList.add(map);
+            this.storeProductCategoryRelList.add(rel);
         }
     }
 
     public void removeAllProducts() {
-        for (StoreProductMapCategoryEntity storeProductMapCategoryEntity : storeProductMapCategoryList) {
-            storeProductMapCategoryEntity.setStoreProductCategory(null); // 주인 쪽 끊어주기
-            storeProductMapCategoryEntity.setStoreProduct(null);
+        for (StoreProductCategoryRelEntity storeProductCategoryRelEntity : storeProductCategoryRelList) {
+            storeProductCategoryRelEntity.setStoreProductCategory(null); // 주인 쪽 끊어주기
+            storeProductCategoryRelEntity.setStoreProduct(null);
         }
-        storeProductMapCategoryList.clear();
+        storeProductCategoryRelList.clear();
     }
 }

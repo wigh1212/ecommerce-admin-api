@@ -1,8 +1,6 @@
-package org.eppay.api.domain.storeProductMapCategory.model;
+package org.eppay.api.domain.storeProductCategoryRel.model;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -11,7 +9,7 @@ import org.eppay.api.domain.storeProduct.model.StoreProductDto;
 
 import java.util.List;
 
-public class StoreProductMapCategoryDto {
+public class StoreProductCategoryRelDto {
     @Data
     @SuperBuilder
     @NoArgsConstructor
@@ -22,8 +20,8 @@ public class StoreProductMapCategoryDto {
         private Long storeProductId;
         private Long storeProductCategoryId;
 
-        public StoreProductMapCategoryEntity toEntity(Long id) {
-            return StoreProductMapCategoryEntity.builder()
+        public StoreProductCategoryRelEntity toEntity(Long id) {
+            return StoreProductCategoryRelEntity.builder()
                     .id(id)
                     .storeId(this.storeId)
                     .storeProductId(this.storeProductId)
@@ -56,7 +54,7 @@ public class StoreProductMapCategoryDto {
     public static class UpdateRequest extends Common {
         private Long id;
 
-        public StoreProductMapCategoryEntity toEntity() {
+        public StoreProductCategoryRelEntity toEntity() {
             return super.toEntity(id);
         }
     }
@@ -67,7 +65,7 @@ public class StoreProductMapCategoryDto {
     public static class Response extends Common {
         private Long id;
         private StoreProductDto.Response storeProduct;
-        public static Response fromEntity(StoreProductMapCategoryEntity entity) {
+        public static Response fromEntity(StoreProductCategoryRelEntity entity) {
             return Response.builder()
                     .id(entity.getId())
                     .storeId(entity.getStoreId())
@@ -93,7 +91,7 @@ public class StoreProductMapCategoryDto {
     public static class Custom extends Common {
         private Long id;
 
-        public StoreProductMapCategoryEntity toEntity() {
+        public StoreProductCategoryRelEntity toEntity() {
             return super.toEntity(id);
         }
     }

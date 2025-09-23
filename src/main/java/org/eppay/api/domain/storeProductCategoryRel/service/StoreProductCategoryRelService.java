@@ -1,4 +1,4 @@
-package org.eppay.api.domain.storeProductMapCategory.service;
+package org.eppay.api.domain.storeProductCategoryRel.service;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,26 +10,26 @@ import org.eppay.api.domain.storeProduct.model.StoreProductEntity;
 import org.eppay.api.domain.storeProduct.repository.StoreProductRepository;
 import org.eppay.api.domain.storeProductCategory.model.StoreProductCategoryEntity;
 import org.eppay.api.domain.storeProductCategory.repository.StoreProductCategoryRepository;
-import org.eppay.api.domain.storeProductMapCategory.model.StoreProductMapCategoryDto;
-import org.eppay.api.domain.storeProductMapCategory.model.StoreProductMapCategoryEntity;
-import org.eppay.api.domain.storeProductMapCategory.repository.StoreProductMapCategoryRepository;
+import org.eppay.api.domain.storeProductCategoryRel.model.StoreProductCategoryRelDto;
+import org.eppay.api.domain.storeProductCategoryRel.model.StoreProductCategoryRelEntity;
+import org.eppay.api.domain.storeProductCategoryRel.repository.StoreProductCategoryRelRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
-public class StoreProductMapCategoryService {
+public class StoreProductCategoryRelService {
 
-    private final StoreProductMapCategoryRepository repository;
+    private final StoreProductCategoryRelRepository repository;
     private final StoreProductCategoryRepository storeProductCategoryRepository;
     private final StoreProductRepository storeProductRepository;
 
     private final ObjectMapper objectMapper;
 
     @Transactional
-    public String create(StoreProductMapCategoryDto.CreateRequest request) throws Exception{
+    public String create(StoreProductCategoryRelDto.CreateRequest request) throws Exception{
 
         StoreProductCategoryEntity storeProductCategoryEntity=storeProductCategoryRepository.findById(request.getStoreProductCategoryId()).orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_CATEGORY_ID));
 
@@ -42,8 +42,8 @@ public class StoreProductMapCategoryService {
         return "200";
     }
 
-    public String delete(StoreProductMapCategoryDto.DeleteRequest request) throws Exception{
-        Optional<StoreProductMapCategoryEntity> optional=repository.findByIdAndStoreId( request.getId(),request.getStoreId());
+    public String delete(StoreProductCategoryRelDto.DeleteRequest request) throws Exception{
+        Optional<StoreProductCategoryRelEntity> optional=repository.findByIdAndStoreId( request.getId(),request.getStoreId());
         if(optional.isEmpty()){
             throw new BaseException(ErrorCode.RESPONSE_FAIL_DELETE);
         }
