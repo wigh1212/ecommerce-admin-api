@@ -5,8 +5,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.eppay.api.domain.storeProductOptionRel.model.StoreProductOptionRelDto;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class StoreProductOptionItemDto {
@@ -67,7 +71,6 @@ public class StoreProductOptionItemDto {
     @NoArgsConstructor
     public static class Response extends Common {
         private Long id;
-
         public static Response fromEntity(StoreProductOptionItemEntity entity) {
             return Response.builder()
                     .id(entity.getId())

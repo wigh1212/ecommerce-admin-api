@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.eppay.api.common.model.BaseCommEntity;
 import org.eppay.api.domain.storeProductCategoryRel.model.StoreProductCategoryRelEntity;
+import org.eppay.api.domain.storeProductOption.model.StoreProductOptionEntity;
 import org.eppay.api.domain.storeProductOptionRel.model.StoreProductOptionRelEntity;
 
 import java.math.BigDecimal;
@@ -44,4 +45,19 @@ public class StoreProductEntity extends BaseCommEntity {
     @OneToMany(mappedBy = "storeProduct", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<StoreProductOptionRelEntity> storeProductOptionRelList = new ArrayList<>();
 
+
+    public void addOption(StoreProductOptionEntity storeProductOptionEntity){
+
+        boolean exists = this.storeProductOptionRelList.stream()
+                .anyMatch(map -> map.getStoreProductOption().getId().equals(storeProductOptionEntity.getId()));
+
+        if (!exists) {
+            StoreProductOptionRelEntity rel = StoreProductOptionRelEntity.builder()
+                    .storeId(this.storeId)
+                    .storeProduct(this)
+                    .storeProductOption(storeProductOptionEntity)
+                    .build();
+            this.storeProductOptionRelList.add(rel);
+        }
+    }
 }

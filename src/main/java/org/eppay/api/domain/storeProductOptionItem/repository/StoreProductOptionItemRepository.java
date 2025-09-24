@@ -9,8 +9,8 @@ import java.util.Optional;
 
 @Repository
 public interface StoreProductOptionItemRepository extends JpaRepository<StoreProductOptionItemEntity,Long> {
-    List<StoreProductOptionItemEntity> findByStoreIdAndOptionId(Long storeId,Long storeProductOptionId);
-    Optional<StoreProductOptionItemEntity> findByIdAndStoreIdAndOptionId(Long id,Long storeId,Long storeProductOptionId);
+    List<StoreProductOptionItemEntity> findByStoreIdAndStoreProductOptionId(Long storeId,Long storeProductOptionId);
+    Optional<StoreProductOptionItemEntity> findByIdAndStoreIdAndStoreProductOptionId(Long id,Long storeId,Long storeProductOptionId);
 }
 
 

@@ -35,7 +35,7 @@ public class StoreProductOptionItemEntity extends BaseCommEntity {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "store_product_option_id")
+    @JoinColumn(name = "store_product_option_id",insertable = false,updatable = false)
     private StoreProductOptionEntity storeProductOption;
 
 }

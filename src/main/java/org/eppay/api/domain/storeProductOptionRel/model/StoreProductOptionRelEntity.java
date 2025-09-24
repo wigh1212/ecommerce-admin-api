@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.eppay.api.common.model.BaseCommEntity;
 import org.eppay.api.domain.storeProduct.model.StoreProductEntity;
-import org.eppay.api.domain.storeProductCategory.model.StoreProductCategoryEntity;
 import org.eppay.api.domain.storeProductOption.model.StoreProductOptionEntity;
 
 @EqualsAndHashCode(callSuper = true)

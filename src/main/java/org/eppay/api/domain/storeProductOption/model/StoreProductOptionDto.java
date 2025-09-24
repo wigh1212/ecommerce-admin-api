@@ -6,6 +6,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.eppay.api.domain.storeProductOptionItem.model.StoreProductOptionItemDto;
+import org.eppay.api.domain.storeProductOptionRel.model.StoreProductOptionRelDto;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class StoreProductOptionDto {
@@ -73,6 +79,7 @@ public class StoreProductOptionDto {
     public static class Response extends Common {
         private Long id;
 
+        private List<StoreProductOptionItemDto.Response> storeProductItemList=new ArrayList<>();
         public static Response fromEntity(StoreProductOptionEntity entity) {
             return Response.builder()
                     .id(entity.getId())
@@ -82,6 +89,7 @@ public class StoreProductOptionDto {
                     .minSelectCount(entity.getMinSelectCount())
                     .maxSelectCount(entity.getMaxSelectCount())
                     .status(entity.isStatus())
+                    .storeProductItemList(entity.getStoreProductOptionItemList()!=null? entity.getStoreProductOptionItemList().stream().map(StoreProductOptionItemDto.Response::fromEntity).collect(Collectors.toList()) : null)
                     .build();
         }
     }

@@ -88,7 +88,7 @@ public class StoreProductDto {
                     .image(entity.getImage())
                     .info(entity.getInfo())
                     .status(entity.isStatus())
-                    .storeProductOptionRelList(entity.getStoreProductOptionRelList().stream().map(StoreProductOptionRelDto.Response::fromEntity).collect(Collectors.toList()))
+                    .storeProductOptionRelList(entity.getStoreProductOptionRelList()!=null? entity.getStoreProductOptionRelList().stream().map(StoreProductOptionRelDto.Response::fromEntity).collect(Collectors.toList()):null)
                     .build();
         }
     }

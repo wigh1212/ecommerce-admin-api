@@ -84,7 +84,7 @@ public class StoreProductCategoryDto {
                     .description(entity.getDescription())
                     .parentId(entity.getParentId())
                     .statue(entity.isStatus())
-                    .storeProductMapCategoryList(entity.getStoreProductCategoryRelList().stream().map(StoreProductCategoryRelDto.Response::fromEntity).collect(Collectors.toList()))
+                    .storeProductMapCategoryList(entity.getStoreProductCategoryRelList()!=null?  entity.getStoreProductCategoryRelList().stream().map(StoreProductCategoryRelDto.Response::fromEntity).collect(Collectors.toList()) : null)
                     .build();
 
         }

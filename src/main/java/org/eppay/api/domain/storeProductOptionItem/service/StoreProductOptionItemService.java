@@ -21,22 +21,24 @@ public class StoreProductOptionItemService {
     private final ObjectMapper objectMapper;
 
     public List<StoreProductOptionItemDto.Response> getList(StoreProductOptionItemDto.SearchRequest request) throws Exception{
-        return repository.findByStoreIdAndOptionId(request.getStoreId(), request.getStoreProductOptionId()).stream().map(StoreProductOptionItemDto.Response::fromEntity).collect(Collectors.toList());
+        return repository.findByStoreIdAndStoreProductOptionId(request.getStoreId(), request.getStoreProductOptionId()).stream().map(StoreProductOptionItemDto.Response::fromEntity).collect(Collectors.toList());
     }
 
     public StoreProductOptionItemDto.Response getOne(StoreProductOptionItemDto.SearchRequest request) throws Exception{
-        return StoreProductOptionItemDto.Response.fromEntity(repository.findByIdAndStoreIdAndOptionId(request.getId(),request.getStoreId(), request.getStoreProductOptionId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_SEARCH)));
+        return StoreProductOptionItemDto.Response.fromEntity(repository.findByIdAndStoreIdAndStoreProductOptionId(request.getId(),request.getStoreId(), request.getStoreProductOptionId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_SEARCH)));
     }
 
     public StoreProductOptionItemDto.Response create(StoreProductOptionItemDto.CreateRequest request) throws Exception{
         return StoreProductOptionItemDto.Response.fromEntity(repository.save(request.toEntity()));
     }
     public StoreProductOptionItemDto.Response update(StoreProductOptionItemDto.UpdateRequest request) throws Exception{
-        repository.findByIdAndStoreIdAndOptionId(request.getId(), request.getStoreId(), request.getStoreProductOptionId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_UPDATE) );
-        return StoreProductOptionItemDto.Response.fromEntity(repository.save(request.toEntity()));
+        StoreProductOptionItemEntity prevEntity=repository.findByIdAndStoreIdAndStoreProductOptionId(request.getId(), request.getStoreId(), request.getStoreProductOptionId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_UPDATE) );
+        StoreProductOptionItemEntity storeProductOptionItemEntity=request.toEntity();
+        storeProductOptionItemEntity.setStoreProductOption(prevEntity.getStoreProductOption());
+        return StoreProductOptionItemDto.Response.fromEntity(repository.save(storeProductOptionItemEntity));
     }
     public String delete(StoreProductOptionItemDto.DeleteRequest request) throws Exception{
-        repository.delete(repository.findByIdAndStoreIdAndOptionId( request.getId(),request.getStoreId(), request.getStoreProductOptionId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_DELETE)));
+        repository.delete(repository.findByIdAndStoreIdAndStoreProductOptionId( request.getId(),request.getStoreId(), request.getStoreProductOptionId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_DELETE)));
         return "200";
     }
 }
