@@ -3,14 +3,19 @@ package org.eppay.api.aop;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.eppay.api.common.annotations.LogDescription;
 import org.eppay.api.common.enums.ErrorCode;
 import org.eppay.api.common.error.BaseException;
 import org.eppay.api.common.loginAccount.LoginAccount;
 import org.eppay.api.common.loginAccount.LoginService;
+import org.eppay.api.domain.adminLog.model.AdminLogEntity;
+import org.eppay.api.domain.adminLog.repository.AdminLogRepository;
 import org.eppay.api.filter.JwtAuthFilter;
 import org.eppay.api.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +24,11 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Aspect
 @Component
@@ -34,10 +42,17 @@ public class ControllerAop {
     @Autowired
     private LoginService loginService;
 
+    @Autowired
+    private AdminLogRepository adminLogRepository;
+
     @Before("execution(* org.eppay.api.controller..*(..))")
     public void beforeMethod(JoinPoint joinPoint) throws JsonProcessingException {
         System.out.println("Before: " + joinPoint.getSignature().toShortString());
+
         HttpServletRequest request = getCurrentHttpRequest();
+
+        logging(joinPoint,request);
+
 
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         if (attributes == null) return;
@@ -69,9 +84,6 @@ public class ControllerAop {
         return null;
     }
 
-
-
-
     private HttpServletRequest getCurrentHttpRequest() {
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         if (requestAttributes instanceof ServletRequestAttributes servletRequestAttributes) {
@@ -80,6 +92,47 @@ public class ControllerAop {
         return null;
     }
 
+    public void logging(JoinPoint joinPoint,HttpServletRequest request){
+        if (request == null) return;
 
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        Method method = signature.getMethod();
+        Class<?> targetClass = method.getDeclaringClass();
 
+        LogDescription classDesc = targetClass.getAnnotation(LogDescription.class);
+        LogDescription methodDesc = method.getAnnotation(LogDescription.class);
+
+        String classMessage = classDesc != null ? classDesc.value() : "";
+        String methodMessage = methodDesc != null ? methodDesc.value() : "";
+        String requestUri = request.getRequestURI();
+        String clientIp = getClientIpAddress(request);
+
+        if (!classMessage.isEmpty() && !methodMessage.isEmpty()) {
+            String paramLog = Arrays.stream(joinPoint.getArgs())
+                    .filter(arg -> !(arg instanceof HttpServletRequest || arg instanceof HttpServletResponse))
+                    .map(arg -> {
+                        try {
+                            return objectMapper.writeValueAsString(arg);
+                        } catch (Exception e) {
+                            return arg.toString();
+                        }
+                    })
+                    .collect(Collectors.joining(", "));
+
+            AdminLogEntity adminLog= AdminLogEntity.builder()
+                    .param(paramLog)
+                    .description(classMessage + " > " + methodMessage)
+                    .ip(clientIp)
+                    .path(requestUri)
+                    .build();
+
+            adminLogRepository.save(adminLog);
+        }
+    }
+
+    private String getClientIpAddress(HttpServletRequest request) {
+        String ip = request.getHeader("X-Forwarded-For");
+        return (ip != null && !ip.isEmpty() && !"unknown".equalsIgnoreCase(ip))
+                ? ip.split(",")[0] : request.getRemoteAddr();
+    }
 }

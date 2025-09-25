@@ -46,4 +46,8 @@ public class StoreProductOptionRelService {
         repository.delete(repository.findByIdAndStoreId( request.getId(),request.getStoreId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_DELETE) ));
         return "200";
     }
+
+    public Boolean isExist(StoreProductOptionRelDto.SearchRequest request) throws Exception{
+        return repository.existsByStoreProductIdAndStoreProductOptionId(request.getStoreProductId(), request.getStoreProductOptionId());
+    }
 }

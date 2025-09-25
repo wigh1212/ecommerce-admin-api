@@ -48,6 +48,7 @@ public class StoreProductOptionDto {
     @NoArgsConstructor
     public static class SearchRequest extends Common {
         private Long id;
+        private Long storeProductId;
     }
     @EqualsAndHashCode(callSuper = true)
     @Data

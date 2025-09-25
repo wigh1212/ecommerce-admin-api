@@ -30,12 +30,13 @@ public class StoreProductOptionRelDto {
         }
     }
 
-    @EqualsAndHashCode(callSuper = true)
     @Data
     @SuperBuilder
     @NoArgsConstructor
-    public static class SearchRequest extends Common {
-        private Long id;
+    public static class SearchRequest {
+
+        private Long storeProductId;
+        private Long storeProductOptionId;
     }
 
     @Data

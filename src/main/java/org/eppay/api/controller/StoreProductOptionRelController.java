@@ -21,6 +21,11 @@ public class StoreProductOptionRelController {
         return CommonResponse.success(service.create(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }
 
+    @GetMapping("/{storeId}/product/option/rel/exist")
+    public CommonResponse isExist( StoreProductOptionRelDto.SearchRequest request) throws Exception {
+        return CommonResponse.success(service.isExist(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
+    }
+
 
     @DeleteMapping("/{storeId}/product/option/rel/{id}")
     public CommonResponse delete( StoreProductOptionRelDto.DeleteRequest request) throws Exception {
