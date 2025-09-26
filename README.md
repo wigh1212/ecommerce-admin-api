@@ -31,7 +31,7 @@
 <br>
 <br>
 
-3. 프로젝트 구조 (Project Structure)
+3.프로젝트 구조 (Project Structure)
 <img width="500" height="913" alt="image" src="https://github.com/user-attachments/assets/08e889c4-b9bf-4d64-8578-a897e1aefa30" />
 <br>
 <br>
