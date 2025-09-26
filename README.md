@@ -37,42 +37,42 @@
 
 5. api 문서
 <img width="277" height="853" alt="image" src="https://github.com/user-attachments/assets/0344360d-f99f-4e05-bcac-094053210b3b" />
-
-1. 로그인 (Auth)
+<br>
+1.로그인 (Auth)
 
 사용자 로그인 및 인증 관련 API
 
-2. 가맹점 (Store)
+2.가맹점 (Store)
 
 가맹점 등록, 수정, 삭제 및 조회 API
 
 가맹점 이벤트 관리 API
 
-3. 가맹점 상품 관리 (Store Products)
+3.가맹점 상품 관리 (Store Products)
 
 상품 등록, 수정, 삭제, 조회 API
 
 상품 옵션 매핑 및 옵션 아이템 관리 API
 
-4. 상품 카테고리 (Categories)
+4.상품 카테고리 (Categories)
 
 상품 카테고리 등록, 수정, 삭제, 조회 API
 
 카테고리와 상품 간 매핑 관리 API
 
-5. 유저정보
+5.유저정보
 
 회원가입 유저 조회,정지 API
 
 회원정보 관리 API
 
-6. 배너
+6.배너
 
 배너 등록,수정,삭제,조회 API
 
 웹 사이트내에 배너(광고) 관리 API
 
-6. 암호화
+7.암호화
 
 properties 암호화 API
 
