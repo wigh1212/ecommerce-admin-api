@@ -1,5 +1,6 @@
 package org.eppay.api.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.eppay.api.common.enums.SuccessCode;
 import org.eppay.api.common.response.CommonResponse;
@@ -8,7 +9,7 @@ import org.eppay.api.domain.admin.service.AdminService;
 import org.eppay.api.domain.store.model.StoreDto;
 import org.eppay.api.domain.store.service.StoreService;
 import org.springframework.web.bind.annotation.*;
-
+@Tag(name = "파일 업로드 API", description = "파일 업로드 API")
 @RestController
 @RequestMapping("/api/v1/store")
 @RequiredArgsConstructor

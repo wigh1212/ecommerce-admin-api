@@ -10,13 +10,14 @@ import org.eppay.api.domain.admin.service.AdminService;
 import org.eppay.api.domain.adminLog.service.AdminLogService;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "어드민 로그 API", description = " ip,path,param,시간 등  기록 조회 ")
 @RestController
 @RequestMapping("/api/v1/admin/log")
 @RequiredArgsConstructor
 public class AdminLogController {
 
     private final AdminLogService service;
-
+    @Operation(summary = "조회", description = "조회")
     @GetMapping()
     public CommonResponse getList() throws Exception {
         return CommonResponse.success(service.getList(), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
