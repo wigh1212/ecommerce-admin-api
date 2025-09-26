@@ -128,3 +128,19 @@ banner / banner_history : 배너 관리 및 이력
 <br>
 <br>
 admin_log : 관리자 활동 로그
+
+<br>
+<br>
+
+7.프로젝트 설정
+<br>
+<br>
+<img width="634" height="559" alt="image" src="https://github.com/user-attachments/assets/746e77df-c5bc-4e96-9a97-796e5a60a1e3" />
+<br>
+<br>
+-Dspring.profiles.active :  prod 운영계 설정 , dev 개발계 설정
+<br>
+<br>
+-Djasypt.encryptor.password : 암호화 키 properties 복호화를 위한 대칭키 구조
+<br>
+<br>
