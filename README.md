@@ -42,11 +42,13 @@
 
  -사용자 로그인 및 인증 관련 API
 <br>
+<br>
 2.가맹점 (Store)
 
  -가맹점 등록, 수정, 삭제 및 조회 API
 
  -가맹점 이벤트 관리 API
+<br>
 <br>
 3.가맹점 상품 관리 (Store Products)
 
@@ -54,11 +56,13 @@
 
  -상품 옵션 매핑 및 옵션 아이템 관리 API
 <br>
+<br>
 4.상품 카테고리 (Categories)
 
  -상품 카테고리 등록, 수정, 삭제, 조회 API
 
  -카테고리와 상품 간 매핑 관리 API
+<br>
 <br>
 5.유저정보
 
@@ -66,11 +70,13 @@
 
  -회원정보 관리 API
 <br>
+<br>
 6.배너
 
  -배너 등록,수정,삭제,조회 API
 
  -웹 사이트내에 배너(광고) 관리 API
+<br>
 <br>
 7.암호화
 
@@ -79,7 +85,7 @@
  -설정 파일 암호화 API
 
 <br>
-
+<br>
 swagger  http://localhost:8080/swagger-ui/index.html
 
 <br>
