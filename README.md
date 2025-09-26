@@ -28,6 +28,7 @@
 
 5. api 문서
 <img width="277" height="853" alt="image" src="https://github.com/user-attachments/assets/0344360d-f99f-4e05-bcac-094053210b3b" />
+
 협업의 직관성을 위해 post맨으로 정리해두고 있습니다.
 swagger  http://localhost:8080/swagger-ui/index.html
 
