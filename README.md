@@ -81,13 +81,6 @@
 Properties 파일 암호화 API
 
 설정 파일 암호화 API
-<br>
-<br>
-7.암호화
-
- -properties 암호화 API
-
- -설정 파일 암호화 API
 
 <br>
 <br>
