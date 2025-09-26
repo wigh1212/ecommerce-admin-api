@@ -16,7 +16,7 @@
 
 
 
-2. 기술 스택 (Tech Stack)
+2.기술 스택 (Tech Stack)
 
 언어/프레임워크: Java 17, Spring Boot 3.4
 
