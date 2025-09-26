@@ -94,43 +94,40 @@ swagger  http://localhost:8080/swagger-ui/index.html
 
 <br>
 <br>
-6. 데이터베이스 구조 (DB Schema)
+6.🗄 데이터베이스 구조 (Database Schema)
 
-<img width="1113" height="1759" alt="image" src="https://github.com/user-attachments/assets/0b5ffb1c-a014-4944-bd1c-3fc861d6588b" />
+본 프로젝트는 store(가맹점) 테이블을 중심으로 데이터가 관리됩니다.
+상품, 카테고리, 옵션, 이벤트 등은 모두 store_id를 기준으로 연계되며,
+가맹점 단위의 데이터 일관성을 보장합니다.
 
-<img width="535" height="293" alt="image" src="https://github.com/user-attachments/assets/e9376786-00fd-43a0-9dc1-352cb77272aa" />
+📌 주요 테이블
 
-store : 가맹점 기본 정보 (상점명, 주소, 상태 등)
-<br>
-<br>
-store_product : 가맹점에 등록된 상품 정보
-<br>
-<br>
-store_product_option / store_product_option_item : 상품 옵션 및 옵션 아이템 관리
-<br>
-<br>
-store_product_category / store_product_category_rel : 카테고리 및 상품-카테고리 매핑
-<br>
-<br>
-store_event : 가맹점 이벤트(프로모션) 관리
-<br>
-<br>
-partner : 가맹점 운영자(파트너) 정보
-<br>
-<br>
-user : 서비스 이용자(소비자) 정보
-<br>
-<br>
+store : 가맹점 기본 정보
+
+store_product : 가맹점 상품 정보
+
+store_product_option / store_product_option_item : 상품 옵션 및 옵션 아이템
+
+store_product_category / store_product_category_rel : 카테고리 및 매핑 관계
+
+store_event : 가맹점 이벤트(프로모션)
+
+partner : 가맹점 운영자 정보
+
+user : 서비스 이용자(소비자)
+
 admin : 관리자 계정 정보
-<br>
-<br>
+
 banner / banner_history : 배너 관리 및 이력
-<br>
-<br>
+
 admin_log : 관리자 활동 로그
 
+📊 ERD 예시
 <br>
 <br>
+<img width="1113" height="1759" alt="image" src="https://github.com/user-attachments/assets/0b5ffb1c-a014-4944-bd1c-3fc861d6588b" />
+
+
 
 7.프로젝트 설정
 <br>
