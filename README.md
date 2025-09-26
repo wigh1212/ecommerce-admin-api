@@ -11,6 +11,7 @@
 3) AOP 권한 관리 기능 ( store )
 
 
+
 2. 기술 스택 (Tech Stack)
 
 언어/프레임워크: Java 17, Spring Boot 3.4
@@ -30,13 +31,16 @@
 <img width="277" height="853" alt="image" src="https://github.com/user-attachments/assets/0344360d-f99f-4e05-bcac-094053210b3b" />
 
 협업의 직관성을 위해 post맨으로 정리해두고 있습니다.
+
 swagger  http://localhost:8080/swagger-ui/index.html
 
 
 6. 데이터베이스 구조 (DB Schema)
+
 <img width="1113" height="1759" alt="image" src="https://github.com/user-attachments/assets/0b5ffb1c-a014-4944-bd1c-3fc861d6588b" />
 
 <img width="535" height="293" alt="image" src="https://github.com/user-attachments/assets/e9376786-00fd-43a0-9dc1-352cb77272aa" />
 
 store에 중점을 두고 있습니다.
+
 연관관계가 있는 경우는 가맹점 관리라는 이름 아래에 관리가 되도록 테이블명 , FK 규칙을 정하고 작업중입니다.
