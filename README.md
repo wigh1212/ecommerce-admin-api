@@ -96,6 +96,31 @@ swagger  http://localhost:8080/swagger-ui/index.html
 
 <img width="535" height="293" alt="image" src="https://github.com/user-attachments/assets/e9376786-00fd-43a0-9dc1-352cb77272aa" />
 
-store에 중점을 두고 있습니다.
-
-연관관계가 있는 경우는 가맹점 관리라는 이름 아래에 관리가 되도록 테이블명 , FK 규칙을 정하고 작업중입니다.
+store : 가맹점 기본 정보 (상점명, 주소, 상태 등)
+<br>
+<br>
+store_product : 가맹점에 등록된 상품 정보
+<br>
+<br>
+store_product_option / store_product_option_item : 상품 옵션 및 옵션 아이템 관리
+<br>
+<br>
+store_product_category / store_product_category_rel : 카테고리 및 상품-카테고리 매핑
+<br>
+<br>
+store_event : 가맹점 이벤트(프로모션) 관리
+<br>
+<br>
+partner : 가맹점 운영자(파트너) 정보
+<br>
+<br>
+user : 서비스 이용자(소비자) 정보
+<br>
+<br>
+admin : 관리자 계정 정보
+<br>
+<br>
+banner / banner_history : 배너 관리 및 이력
+<br>
+<br>
+admin_log : 관리자 활동 로그
