@@ -13,7 +13,8 @@
  -AOP 권한 관리 기능 
 
  -AOP 로깅 기능
-
+<br>
+<br>
 
 
 2.기술 스택 (Tech Stack)
@@ -26,10 +27,13 @@
 
 배포: AWS EC2
 
+<br>
+<br>
 
 3. 프로젝트 구조 (Project Structure)
 <img width="500" height="913" alt="image" src="https://github.com/user-attachments/assets/08e889c4-b9bf-4d64-8578-a897e1aefa30" />
-
+<br>
+<br>
 
 5. api 문서
 <img width="277" height="853" alt="image" src="https://github.com/user-attachments/assets/0344360d-f99f-4e05-bcac-094053210b3b" />
@@ -74,10 +78,12 @@ properties 암호화 API
 
 설정 파일 암호화 API
 
+<br>
 
 swagger  http://localhost:8080/swagger-ui/index.html
 
-
+<br>
+<br>
 6. 데이터베이스 구조 (DB Schema)
 
 <img width="1113" height="1759" alt="image" src="https://github.com/user-attachments/assets/0b5ffb1c-a014-4944-bd1c-3fc861d6588b" />
