@@ -14,11 +14,11 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Set;
-@Tag(name = "암호화 API", description = "암호화 API")
+@Tag(name = "Jasypt", description = "암호화 API")
 @RestController
 @RequestMapping("/api/v1/jasypt")
 @RequiredArgsConstructor
-public class jasyptController {
+public class JasyptController {
 
     Set<String> SENSITIVE_KEYS = Set.of("spring.datasource.password", "spring.datasource.username", "aws.s3.key", "aws.s3.secret", "stayMoa.kakao.api.addres.key");
     private final StringEncryptor encryptor;

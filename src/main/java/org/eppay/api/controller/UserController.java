@@ -1,5 +1,7 @@
 package org.eppay.api.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.eppay.api.common.enums.SuccessCode;
 import org.eppay.api.common.response.CommonResponse;
@@ -8,14 +10,14 @@ import org.eppay.api.domain.store.service.StoreService;
 import org.eppay.api.domain.user.model.UserDto;
 import org.eppay.api.domain.user.service.UserService;
 import org.springframework.web.bind.annotation.*;
-
+@Tag(name = "User", description = "유저 관리 API")
 @RestController
 @RequestMapping("/api/v1/user")
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService service;
-
+    @Operation(summary = "조회", description = "조회")
     @GetMapping()
     public CommonResponse getList() throws Exception {
         return CommonResponse.success(service.getList(), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
@@ -26,19 +28,19 @@ public class UserController {
         return CommonResponse.success(service.getOne(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }
 
-    @PostMapping()
-    public CommonResponse create(@RequestBody UserDto.CreateRequest request) throws Exception {
-        return CommonResponse.success(service.create(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
-    }
+//    @PostMapping()
+//    public CommonResponse create(@RequestBody UserDto.CreateRequest request) throws Exception {
+//        return CommonResponse.success(service.create(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
+//    }
+//
+//    @PutMapping("/{id}")
+//    public CommonResponse update(@RequestBody UserDto.UpdateRequest request) throws Exception {
+//        return CommonResponse.success(service.update(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
+//    }
 
-    @PutMapping("/{id}")
-    public CommonResponse update(@RequestBody UserDto.UpdateRequest request) throws Exception {
-        return CommonResponse.success(service.update(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
-    }
-
-    @DeleteMapping("/{id}")
-    public CommonResponse delete( UserDto.DeleteRequest request) throws Exception {
-        return CommonResponse.success(service.delete(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
-    }
+//    @DeleteMapping("/{id}")
+//    public CommonResponse delete( UserDto.DeleteRequest request) throws Exception {
+//        return CommonResponse.success(service.delete(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
+//    }
 
 }

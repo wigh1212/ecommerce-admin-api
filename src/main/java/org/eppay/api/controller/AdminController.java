@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.eppay.api.common.enums.SuccessCode;
 import org.eppay.api.common.response.CommonResponse;
 
-@Tag(name = "어드민 로그인 API", description = "어드민 조회,상세조회,로그인 api")
+@Tag(name = "Admin", description = "어드민 조회,상세조회,로그인 api")
 @RestController
 @RequestMapping("/api/v1/admin")
 @RequiredArgsConstructor

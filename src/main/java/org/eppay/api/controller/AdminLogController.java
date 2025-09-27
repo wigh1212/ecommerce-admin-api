@@ -10,7 +10,7 @@ import org.eppay.api.domain.admin.service.AdminService;
 import org.eppay.api.domain.adminLog.service.AdminLogService;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "어드민 로그 API", description = " ip,path,param,시간 등  기록 조회 ")
+@Tag(name = "AdminLog", description = " ip,path,param,시간 등  기록 조회 ")
 @RestController
 @RequestMapping("/api/v1/admin/log")
 @RequiredArgsConstructor

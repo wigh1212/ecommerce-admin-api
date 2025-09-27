@@ -33,11 +33,11 @@ public class StoreProductOptionRelEntity extends BaseCommEntity {
 
     private Long ord;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_product_option_id")
     private StoreProductOptionEntity storeProductOption;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_product_id")
     private StoreProductEntity storeProduct;

@@ -10,7 +10,7 @@ import org.eppay.api.domain.admin.service.AdminService;
 import org.eppay.api.domain.file.service.FileService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-@Tag(name = "파일 업로드 API", description = "파일 업로드 API")
+@Tag(name = "FileUpload", description = "파일 업로드 API")
 @RestController
 @RequestMapping("/api/v1/file/upload")
 @RequiredArgsConstructor

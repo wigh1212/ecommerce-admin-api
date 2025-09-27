@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.eppay.api.common.enums.SuccessCode;
 import org.eppay.api.common.response.CommonResponse;
 
-@Tag(name = "배너 API", description = " 배너 조회,상세조회,생성,수정,삭제 API")
+@Tag(name = "Banner", description = " 배너 조회,상세조회,생성,수정,삭제 API")
 @RestController
 @RequestMapping("/api/v1/banner")
 @RequiredArgsConstructor

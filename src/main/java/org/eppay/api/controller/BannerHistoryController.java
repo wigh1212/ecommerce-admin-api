@@ -10,7 +10,7 @@ import org.eppay.api.domain.banner.service.BannerService;
 import org.eppay.api.domain.bannerHistory.model.BannerHistoryDto;
 import org.eppay.api.domain.bannerHistory.service.BannerHistoryService;
 import org.springframework.web.bind.annotation.*;
-@Tag(name = "배너 로그 API", description = " 배너 조회,상세조회API")
+@Tag(name = "BannerHistory", description = " 배너 조회,상세조회API")
 @RestController
 @RequestMapping("/api/v1/banner/{bannerId}/history")
 @RequiredArgsConstructor

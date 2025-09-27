@@ -50,6 +50,11 @@ public class StoreService {
 
     @Transactional
     public StoreDto.Response create(StoreDto.CreateRequest request) throws Exception{
+        LoginAccount account=loginService.getAccount();
+        if(!account.getType().equals("ADMIN")){
+            throw new BaseException(ErrorCode.ACCESS_DENIED);
+        }
+
         if(repository.existsByBusinessNumber(request.getBusinessNumber())){
             throw new BaseException(ErrorCode.EXIST_BUSINESS_NUMBER);
         }

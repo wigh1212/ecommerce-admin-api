@@ -1,5 +1,7 @@
 package org.eppay.api.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.eppay.api.common.enums.SuccessCode;
 import org.eppay.api.common.response.CommonResponse;
@@ -8,25 +10,25 @@ import org.eppay.api.domain.storeProductCategoryRel.service.StoreProductCategory
 import org.eppay.api.domain.storeProductOptionRel.model.StoreProductOptionRelDto;
 import org.eppay.api.domain.storeProductOptionRel.service.StoreProductOptionRelService;
 import org.springframework.web.bind.annotation.*;
-
+@Tag(name = "StoreProductOptionRel", description = "가맹점 상품 옵션 매핑 API")
 @RestController
 @RequestMapping("/api/v1/store")
 @RequiredArgsConstructor
 public class StoreProductOptionRelController {
 
     private final StoreProductOptionRelService service;
-
+    @Operation(summary = "매핑", description = "매핑")
     @PostMapping("/{storeId}/product/option/rel")
     public CommonResponse create(@RequestBody StoreProductOptionRelDto.CreateRequest request) throws Exception {
         return CommonResponse.success(service.create(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }
-
+    @Operation(summary = "상세 조회", description = "상세 조회")
     @GetMapping("/{storeId}/product/option/rel/exist")
     public CommonResponse isExist( StoreProductOptionRelDto.SearchRequest request) throws Exception {
         return CommonResponse.success(service.isExist(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }
 
-
+    @Operation(summary = "삭제", description = "삭제")
     @DeleteMapping("/{storeId}/product/option/rel/{id}")
     public CommonResponse delete( StoreProductOptionRelDto.DeleteRequest request) throws Exception {
         return CommonResponse.success(service.delete(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());

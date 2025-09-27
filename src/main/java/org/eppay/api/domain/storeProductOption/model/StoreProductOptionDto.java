@@ -28,7 +28,9 @@ public class StoreProductOptionDto {
         private int minSelectCount;
         private int maxSelectCount;
         @Builder.Default
-        private final boolean status=true;
+        private boolean status=true;
+        @Builder.Default
+        private boolean existProduct=false;
 
         public StoreProductOptionEntity toEntity(Long id) {
             return StoreProductOptionEntity.builder()

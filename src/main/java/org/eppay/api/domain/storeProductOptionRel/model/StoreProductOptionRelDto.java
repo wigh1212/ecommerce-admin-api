@@ -6,8 +6,11 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.eppay.api.domain.storeProduct.model.StoreProductDto;
+import org.eppay.api.domain.storeProductOption.model.StoreProductOptionDto;
+import org.eppay.api.domain.storeProductOptionItem.model.StoreProductOptionItemDto;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StoreProductOptionRelDto {
     @Data
@@ -65,14 +68,14 @@ public class StoreProductOptionRelDto {
     @NoArgsConstructor
     public static class Response extends Common {
         private Long id;
-        private StoreProductDto.Response storeProduct;
+        private StoreProductOptionDto.Response storeProductOption ;
         public static Response fromEntity(StoreProductOptionRelEntity entity) {
             return Response.builder()
                     .id(entity.getId())
                     .storeId(entity.getStoreId())
                     .storeProductId(entity.getStoreProductId())
                     .storeProductOptionId(entity.getStoreProductOptionId())
-                    .storeProduct(StoreProductDto.Response.fromEntity(entity.getStoreProduct()))
+                    .storeProductOption(StoreProductOptionDto.Response.fromEntity(entity.getStoreProductOption()))
                     .build();
 
         }
