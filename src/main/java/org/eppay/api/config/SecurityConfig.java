@@ -24,19 +24,9 @@ public class SecurityConfig {
     private final CustomSecurityHandler customSecurityHandlers;
     private final JwtAuthFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
-//"/api/v1/qr/**"
-//    private static final String[] IGNORE_PAGES = {"favicon.ico","/error","/api/v1/auth/**","/api/v1/papago/**","/api/v1/qr/**"}; // 제외할 경로
     private static final String[] BASE_PAGES = {"/ws/**","/api/v1/admin/login","/api/v1/admin","/v3/**"};
     private static final String[] SWAGGER_PAGES = {"/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html", "/swagger-resources/**", "/webjars/**"};
 
-    //    private static final String[] MASTER_PAGES = { "/api/v1/baseStoreDivision/**"}; // 마스터 경로
-//    private static final String[] PARTNER_PAGES = { "/api/v1/baseWorks/**", "/api/v1/baseStoreDivision/**"}; // 파트너 경로
-//    private static final String[] HOTEL_PAGES = {"/api/v1/order/hotel/**"}; // 호텔 경로
-//    private static final String[] STORE_PAGES = {"/api/v1/order/store/**"}; // 매장 경로
-//    private static final String[] MASTER_AND_HOTEL_PAGES = {"/api/v1/hotel/**","/api/v1/baseWorks/**"
-//                                                          ,"/api/v1/works/hotel/**","/api/v1/near/store/**","/api/v1/works/hotel/product/**"
-//                                                          ,"/api/v1/works/hotel/**","/api/v1/hotel/worksHotel/**","/api/v1/checkout/**"};
-    
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         

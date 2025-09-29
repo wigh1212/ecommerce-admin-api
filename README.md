@@ -100,7 +100,7 @@ store : 가맹점 기본 정보
 
 store_product : 가맹점 상품 정보
 
-store_product_option / store_product_option_item : 상품 옵션 및 옵션 아이템
+store_product_option / store_product_option_item / store_product_option_rel : 상품 옵션 및 옵션 아이템 및 상품 옵션 매핑 관계 
 
 store_product_category / store_product_category_rel : 카테고리 및 매핑 관계
 

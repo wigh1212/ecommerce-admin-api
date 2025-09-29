@@ -81,7 +81,7 @@ public class StoreProductOptionDto {
     @NoArgsConstructor
     public static class Response extends Common {
         private Long id;
-
+        @Builder.Default
         private List<StoreProductOptionItemDto.Response> storeProductItemList=new ArrayList<>();
         public static Response fromEntity(StoreProductOptionEntity entity) {
             return Response.builder()
