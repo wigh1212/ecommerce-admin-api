@@ -116,11 +116,6 @@ banner / banner_history : 배너 관리 및 이력
 
 admin_log : 관리자 활동 로그
 
-📊 ERD 예시
-<br>
-<br>
-<img width="1113" height="1759" alt="image" src="https://github.com/user-attachments/assets/0b5ffb1c-a014-4944-bd1c-3fc861d6588b" />
-
 
 
 7.프로젝트 설정
