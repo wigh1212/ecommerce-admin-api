@@ -47,6 +47,7 @@ public class StoreProductOptionRelDto {
     @NoArgsConstructor
     public static class CreateRequest {
         private Long id;
+        private Long storeId;
         private Long storeProductId;
         private Long storeProductOptionId;
 

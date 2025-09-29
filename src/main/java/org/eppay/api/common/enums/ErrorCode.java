@@ -53,7 +53,9 @@ public enum ErrorCode {
 
     EXIST_BUSINESS_NUMBER("5002","사업자번호가 중복입니다."),
     EXIST_MAPPING("5003","이미 존재하는 매칭정보입니다."),
-    NOT_EXIST_CATEGORY_ID("5004","존재하지 않는 카테고리 아이디입니다."),
+    NOT_EXIST_CATEGORY("5004","존재하지 않는 카테고리 입니다."),
+    NOT_EXIST_PRODUCT_OPTION("5004","존재하지 않는 상품 옵션 입니다."),
+    NOT_EXIST_PRODUCT("5004","존재하지 않는 상품 입니다."),
     ;
 
 

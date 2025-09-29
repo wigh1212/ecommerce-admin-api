@@ -13,6 +13,7 @@ import org.eppay.api.domain.storeProductCategory.repository.StoreProductCategory
 import org.eppay.api.domain.storeProductCategoryRel.model.StoreProductCategoryRelDto;
 import org.eppay.api.domain.storeProductCategoryRel.model.StoreProductCategoryRelEntity;
 import org.eppay.api.domain.storeProductCategoryRel.repository.StoreProductCategoryRelRepository;
+import org.eppay.api.domain.storeProductOption.model.StoreProductOptionEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,14 +32,13 @@ public class StoreProductCategoryRelService {
     @Transactional
     public String create(StoreProductCategoryRelDto.CreateRequest request) throws Exception{
 
-        StoreProductCategoryEntity storeProductCategoryEntity=storeProductCategoryRepository.findById(request.getStoreProductCategoryId()).orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_CATEGORY_ID));
+        StoreProductCategoryEntity storeProductCategoryEntity=storeProductCategoryRepository.findByIdAndStoreId(request.getStoreProductCategoryId(),request.getStoreId()).orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_CATEGORY));
 
-        storeProductCategoryEntity.removeAllProducts();
+        StoreProductEntity storeProductEntity=storeProductRepository.findByIdAndStoreId(request.getStoreProductId(),request.getStoreId()).orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_PRODUCT ));
 
-        List<StoreProductEntity> products = storeProductRepository.findAllByIdInAndStoreId(request.getStoreProductIdList(), storeProductCategoryEntity.getStoreId());
+        storeProductCategoryEntity.addProduct(storeProductEntity) ;
 
-        products.forEach(storeProductCategoryEntity::addProduct);
-
+        storeProductCategoryRepository.save(storeProductCategoryEntity);
         return "200";
     }
 

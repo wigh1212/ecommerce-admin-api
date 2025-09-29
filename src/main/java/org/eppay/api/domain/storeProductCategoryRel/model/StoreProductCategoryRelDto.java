@@ -43,8 +43,9 @@ public class StoreProductCategoryRelDto {
     @NoArgsConstructor
     public static class CreateRequest {
         private Long id;
+        private Long storeId;
         private Long storeProductCategoryId;
-        private List<Long> storeProductIdList;
+        private Long storeProductId;
 
     }
     @EqualsAndHashCode(callSuper = true)

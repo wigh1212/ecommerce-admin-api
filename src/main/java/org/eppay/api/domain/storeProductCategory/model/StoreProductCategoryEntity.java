@@ -29,8 +29,6 @@ public class StoreProductCategoryEntity extends BaseCommEntity {
     private String name;
     @Column(name = "description")
     private String description;
-    @Column(name = "parent_id")
-    private Long parentId;
 
     @Column(name = "status")
     private boolean status;

@@ -31,9 +31,9 @@ public class StoreProductOptionRelService {
     @Transactional
     public String create(StoreProductOptionRelDto.CreateRequest request) throws Exception{
 
-        StoreProductEntity storeProductEntity=storeProductRepository.findById(request.getStoreProductId()).orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_CATEGORY_ID));
+        StoreProductEntity storeProductEntity=storeProductRepository.findByIdAndStoreId(request.getStoreProductId(),request.getStoreId()).orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_PRODUCT));
 
-        StoreProductOptionEntity storeProductOptionEntity = storeProductOptionRepository.findById(request.getStoreProductOptionId()).orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_CATEGORY_ID));
+        StoreProductOptionEntity storeProductOptionEntity = storeProductOptionRepository.findByIdAndStoreId(request.getStoreProductOptionId(),request.getStoreId()).orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_PRODUCT_OPTION));
 
         storeProductEntity.addOption( storeProductOptionEntity);
 

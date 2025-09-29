@@ -8,6 +8,7 @@ import org.eppay.api.common.error.BaseException;
 import org.eppay.api.domain.storeProduct.model.StoreProductDto;
 import org.eppay.api.domain.storeProduct.model.StoreProductEntity;
 import org.eppay.api.domain.storeProduct.repository.StoreProductRepository;
+import org.eppay.api.domain.storeProductCategoryRel.repository.StoreProductCategoryRelRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,10 +20,17 @@ import java.util.stream.Collectors;
 public class StoreProductService {
 
     private final StoreProductRepository repository;
+    private final StoreProductCategoryRelRepository storeProductCategoryRelRepository;
     private final ObjectMapper objectMapper;
 
     public List<StoreProductDto.Response> getList(StoreProductDto.SearchRequest request) throws Exception{
-        return repository.findByStoreId(request.getStoreId()).stream().map(StoreProductDto.Response::fromEntity).collect(Collectors.toList());
+        List<StoreProductDto.Response> list=repository.findByStoreId(request.getStoreId()).stream().map(StoreProductDto.Response::fromEntity).toList();
+        if(request.getStoreProductCategoryId()!=null){
+            for (StoreProductDto.Response response : list) {
+                response.setExistCategory(storeProductCategoryRelRepository.existsByStoreProductIdAndStoreProductCategoryId(response.getId(), request.getStoreProductCategoryId()));
+            }
+        }
+        return list;
     }
 
     public StoreProductDto.Response getOne(StoreProductDto.SearchRequest request) throws Exception{

@@ -21,7 +21,6 @@ public class StoreProductCategoryDto {
         private Long storeId;
         private String name;
         private String description;
-        private Long parentId;
         @Builder.Default
         private boolean statue=true;
 
@@ -31,7 +30,6 @@ public class StoreProductCategoryDto {
                     .storeId(this.storeId)
                     .name(this.name)
                     .description(this.description)
-                    .parentId(this.parentId)
                     .status(this.statue)
                     .build();
         }
@@ -82,7 +80,6 @@ public class StoreProductCategoryDto {
                     .storeId(entity.getStoreId())
                     .name(entity.getName())
                     .description(entity.getDescription())
-                    .parentId(entity.getParentId())
                     .statue(entity.isStatus())
                     .storeProductMapCategoryList(entity.getStoreProductCategoryRelList()!=null?  entity.getStoreProductCategoryRelList().stream().map(StoreProductCategoryRelDto.Response::fromEntity).collect(Collectors.toList()) : null)
                     .build();

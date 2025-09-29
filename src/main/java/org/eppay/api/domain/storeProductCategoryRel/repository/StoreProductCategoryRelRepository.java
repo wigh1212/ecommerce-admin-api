@@ -13,6 +13,8 @@ public interface StoreProductCategoryRelRepository extends JpaRepository<StorePr
     Optional<StoreProductCategoryRelEntity> findByIdAndStoreId(Long id, Long storeId);
     Optional<StoreProductCategoryRelEntity> findByStoreProductIdAndStoreProductCategoryId(Long storeProductId, Long storeProductCategoryId);
 
+
+    boolean existsByStoreProductIdAndStoreProductCategoryId(Long storeProductId,Long storeProductCategoryId);
 }
 
 

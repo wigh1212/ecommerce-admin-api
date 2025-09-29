@@ -28,7 +28,9 @@ public class StoreProductDto {
         private String image;
         private String info;
         @Builder.Default
-        private final boolean status=true;
+        private boolean status=true;
+        @Builder.Default
+        private boolean existCategory=false;
 
         public StoreProductEntity toEntity(Long id) {
             return StoreProductEntity.builder()
@@ -42,12 +44,14 @@ public class StoreProductDto {
                     .build();
         }
     }
+
     @EqualsAndHashCode(callSuper = true)
     @Data
     @SuperBuilder
     @NoArgsConstructor
     public static class SearchRequest extends Common {
         private Long id;
+        private Long storeProductCategoryId;
     }
     @EqualsAndHashCode(callSuper = true)
     @Data
