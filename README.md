@@ -86,7 +86,6 @@ Properties 파일 암호화 API
 
 <br>
 <br>
-swagger  http://localhost:8080/swagger-ui/index.html
 
 <br>
 <br>
