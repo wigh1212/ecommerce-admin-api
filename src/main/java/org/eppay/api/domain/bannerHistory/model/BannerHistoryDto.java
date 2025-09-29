@@ -2,13 +2,17 @@ package org.eppay.api.domain.bannerHistory.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.eppay.api.domain.bannerHistory.model.BannerHistoryEntity;
 
 import java.time.LocalDateTime;
 
-@Data
 public class BannerHistoryDto {
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class Common {
         private Long bannerId;
         private String image;
@@ -28,12 +32,18 @@ public class BannerHistoryDto {
         }
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class SearchRequest extends Common {
         private Long id;
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class CreateRequest extends Common {
         private Long id;
 
@@ -42,7 +52,10 @@ public class BannerHistoryDto {
         }
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class UpdateRequest extends Common {
         private Long id;
 
@@ -51,7 +64,10 @@ public class BannerHistoryDto {
         }
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class Response extends Common {
         private Long id;
 
@@ -59,26 +75,29 @@ public class BannerHistoryDto {
         private LocalDateTime createdAt;
         private String createdBy;
         public static Response fromEntity(BannerHistoryEntity entity) {
-            Response response = new Response();
-            response.setId(entity.getId());
-            response.setBannerId(entity.getBannerId());
-            response.setImage(entity.getImage());
-            response.setLink(entity.getLink());
-            response.setType(entity.getType());
-            response.setActivate(entity.isActivate());
-            response.setCreatedAt(entity.getCreatedAt());
-            response.setCreatedBy(entity.getCreatedBy());
-            return response;
+            return Response.builder()
+                    .id(entity.getId())
+                    .bannerId(entity.getBannerId())
+                    .image(entity.getImage())
+                    .link(entity.getLink())
+                    .type(entity.getType())
+                    .activate(entity.isActivate())
+                    .build();
         }
     }
 
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class DeleteRequest {
         private Long id;
     }
 
 
+    @EqualsAndHashCode(callSuper = true)
     @Data
+    @SuperBuilder
+    @NoArgsConstructor
     public static class Custom extends Common {
         private Long id;
 

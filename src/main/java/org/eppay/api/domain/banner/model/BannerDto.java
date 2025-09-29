@@ -82,15 +82,16 @@ public class BannerDto {
         private LocalDateTime applyAt;
         private String applyBy;
         public static Response fromEntity(BannerEntity entity) {
-            Response response = new Response();
-            response.setId(entity.getId());
-            response.setImage(entity.getImage());
-            response.setLink(entity.getLink());
-            response.setType(entity.getType());
-            response.setActivate(entity.isActivate());
-            response.setApplyAt(entity.getApplyAt());
-            response.setApplyBy(entity.getApplyBy());
-            return response;
+
+            return Response.builder()
+                    .id(entity.getId())
+                    .image(entity.getImage())
+                    .link(entity.getLink())
+                    .type(entity.getType())
+                    .activate(entity.isActivate())
+                    .applyAt(entity.getApplyAt())
+                    .applyBy(entity.getApplyBy())
+                    .build();
         }
     }
 
