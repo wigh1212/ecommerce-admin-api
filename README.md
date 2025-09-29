@@ -40,7 +40,9 @@
 <br>
 
 5. api 문서
-<img width="277" height="853" alt="image" src="https://github.com/user-attachments/assets/0344360d-f99f-4e05-bcac-094053210b3b" />
+<br>
+<img width="1903" height="1701" alt="image" src="https://github.com/user-attachments/assets/2ca160ce-910d-4d06-a59f-e7c37c59bee7" />
+
 <br>
 🔐 로그인 (Auth)
 
