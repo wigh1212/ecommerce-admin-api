@@ -1,16 +1,14 @@
 package org.eppay.api.domain.storeCategory.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.eppay.api.common.model.BaseCommEntity;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Builder
 @Table(name = "store_category")
 public class StoreCategoryEntity extends BaseCommEntity {
