@@ -3,6 +3,7 @@ package org.eppay.api.domain.admin.model;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,7 @@ public class AdminDto {
         private String password;
         private String type;
         private Long storeId;
+        @Builder.Default
         private boolean status=true;
 
         public AdminEntity toEntity(Long id) {
