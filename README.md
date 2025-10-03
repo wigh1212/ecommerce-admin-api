@@ -41,6 +41,8 @@
 
 5. api 문서
 <br>
+http://3.34.177.46/swagger-ui/index.html
+<br>
 <img width="1903" height="1701" alt="image" src="https://github.com/user-attachments/assets/2ca160ce-910d-4d06-a59f-e7c37c59bee7" />
 
 <br>
