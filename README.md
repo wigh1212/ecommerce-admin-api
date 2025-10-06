@@ -138,5 +138,10 @@ admin_log : 관리자 활동 로그
 8. 배포 ( CI/CD )
 <br>
 <br>
+<img width="1907" height="403" alt="image" src="https://github.com/user-attachments/assets/8f6b8d74-2b1d-4f8b-8a2b-25558e617116" />
+
+<br>
+<br>
+
 <img width="1146" height="714" alt="image" src="https://github.com/user-attachments/assets/6abbc687-d4af-4380-bfcc-bf7dd644fcb1" />
 
