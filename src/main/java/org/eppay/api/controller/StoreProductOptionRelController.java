@@ -22,11 +22,6 @@ public class StoreProductOptionRelController {
     public CommonResponse create(@RequestBody StoreProductOptionRelDto.CreateRequest request) throws Exception {
         return CommonResponse.success(service.create(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }
-    @Operation(summary = "상세 조회", description = "상세 조회")
-    @GetMapping("/{storeId}/product/option/rel/exist")
-    public CommonResponse isExist( StoreProductOptionRelDto.SearchRequest request) throws Exception {
-        return CommonResponse.success(service.isExist(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
-    }
 
     @Operation(summary = "삭제", description = "삭제")
     @DeleteMapping("/{storeId}/product/option/rel/{id}")
