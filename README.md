@@ -1,5 +1,5 @@
-1.🚀 프로젝트 개요
-
+<b>1. 프로젝트 개요</b>
+<hr />
 이커머스 프로젝트
 
 온라인 웹 쇼핑몰 어드민(관리자) 백엔드 서버 프로젝트입니다.
@@ -18,8 +18,8 @@
 <br>
 <br>
 
-2.🛠 기술 스택 (Tech Stack)
-
+<b>2.기술 스택 (Tech Stack)</b>
+<hr />
 언어 & 프레임워크: Java 17, Spring Boot 3.4
 
 데이터베이스: MySQL
@@ -30,16 +30,18 @@
 
 <br>
 <br>
-
-3.프로젝트 구조 (Project Structure)
+<hr />
+<b>3.프로젝트 구조 (Project Structure)</b>
+<hr />
 <br>
 <br>
 
 <img width="500" height="913" alt="image" src="https://github.com/user-attachments/assets/08e889c4-b9bf-4d64-8578-a897e1aefa30" />
 <br>
 <br>
-
-5. api 문서
+<hr />
+<b>5. api 문서</b>
+<hr />
 <br>
 http://3.34.177.46/swagger-ui/index.html
 <br>
@@ -88,10 +90,9 @@ Properties 파일 암호화 API
 
 <br>
 <br>
-
-<br>
-<br>
-6.🗄 데이터베이스 구조 (Database Schema)
+<hr />
+<b>6.🗄 데이터베이스 구조 (Database Schema)</b>
+<hr />
 
 본 프로젝트는 store(가맹점) 테이블을 중심으로 데이터가 관리됩니다.
 상품, 카테고리, 옵션, 이벤트 등은 모두 store_id를 기준으로 연계되며,
@@ -120,8 +121,9 @@ banner / banner_history : 배너 관리 및 이력
 admin_log : 관리자 활동 로그
 
 
-
-7.프로젝트 설정
+<hr />
+<b>7.프로젝트 설정<b>
+<hr />
 <br>
 <br>
 <img width="634" height="559" alt="image" src="https://github.com/user-attachments/assets/746e77df-c5bc-4e96-9a97-796e5a60a1e3" />
@@ -134,8 +136,9 @@ admin_log : 관리자 활동 로그
 <br>
 <br>
 
-
-8. 배포 ( CI/CD )
+<hr />
+<b>8. 배포 ( CI/CD )</b>
+<hr />
 <br>
 <br>
 <img width="1907" height="403" alt="image" src="https://github.com/user-attachments/assets/8f6b8d74-2b1d-4f8b-8a2b-25558e617116" />
