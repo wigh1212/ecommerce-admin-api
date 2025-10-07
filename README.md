@@ -45,7 +45,7 @@
     │  ├─📂 json
     │  ├─📂 loginAccount
     │  ├─📂 model
-    │  ├─📂 response
+    │  └─📂 response
     ├─📂 config
     ├─📂 controller
     ├─📂 domain
