@@ -177,6 +177,6 @@ admin_log : 관리자 활동 로그
 
 <br>
 <br>
+<img width="1104" height="691" alt="image" src="https://github.com/user-attachments/assets/64fcc493-f35d-493b-8e67-d523aadb1c4d" />
 
-<img width="1146" height="714" alt="image" src="https://github.com/user-attachments/assets/6abbc687-d4af-4380-bfcc-bf7dd644fcb1" />
 
