@@ -46,9 +46,8 @@ public class StoreProductCategoryService {
     }
 
     public String delete(StoreProductCategoryDto.DeleteRequest request) throws Exception{
-
         StoreProductCategoryEntity storeProductCategoryEntity=repository.findByIdAndStoreId( request.getId(),request.getStoreId()).orElseThrow(()-> new BaseException(ErrorCode.RESPONSE_FAIL_DELETE));
-        storeProductCategoryEntity.setStatus(false);
+        storeProductCategoryEntity.setStatus(!storeProductCategoryEntity.isStatus());
         repository.save(storeProductCategoryEntity);
         return "200";
     }

@@ -82,7 +82,7 @@ public class StoreProductOptionDto {
     public static class Response extends Common {
         private Long id;
         @Builder.Default
-        private List<StoreProductOptionItemDto.Response> storeProductItemList=new ArrayList<>();
+        private List<StoreProductOptionItemDto.Response> storeProductOptionItemList=new ArrayList<>();
         public static Response fromEntity(StoreProductOptionEntity entity) {
             return Response.builder()
                     .id(entity.getId())
@@ -92,7 +92,7 @@ public class StoreProductOptionDto {
                     .minSelectCount(entity.getMinSelectCount())
                     .maxSelectCount(entity.getMaxSelectCount())
                     .status(entity.isStatus())
-                    .storeProductItemList(entity.getStoreProductOptionItemList()!=null? entity.getStoreProductOptionItemList().stream().map(StoreProductOptionItemDto.Response::fromEntity).collect(Collectors.toList()) : null)
+                    .storeProductOptionItemList(entity.getStoreProductOptionItemList()!=null? entity.getStoreProductOptionItemList().stream().map(StoreProductOptionItemDto.Response::fromEntity).collect(Collectors.toList()) : null)
                     .build();
         }
     }

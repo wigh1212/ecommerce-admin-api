@@ -70,6 +70,7 @@ public class UserDto {
     @Data
     public static class Response {
         private Long id;
+        private String userName;
         private String name;
         private String phone;
         private String address;
@@ -79,6 +80,7 @@ public class UserDto {
         public static Response fromEntity(UserEntity entity) {
             Response response = new Response();
             response.setId(entity.getId());
+            response.setUserName(entity.getUserName());
             response.setName(entity.getName());
             response.setAddress(entity.getAddress());
             response.setZipCode(entity.getZipCode());

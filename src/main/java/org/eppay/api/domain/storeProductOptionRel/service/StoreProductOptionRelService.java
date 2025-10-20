@@ -33,6 +33,8 @@ public class StoreProductOptionRelService {
 
         StoreProductEntity storeProductEntity=storeProductRepository.findByIdAndStoreId(request.getStoreProductId(),request.getStoreId()).orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_PRODUCT));
 
+        System.out.println(objectMapper.writeValueAsString(request));
+
         StoreProductOptionEntity storeProductOptionEntity = storeProductOptionRepository.findByIdAndStoreId(request.getStoreProductOptionId(),request.getStoreId()).orElseThrow(() -> new BaseException(ErrorCode.NOT_EXIST_PRODUCT_OPTION));
 
         storeProductEntity.addOption( storeProductOptionEntity);
@@ -43,11 +45,12 @@ public class StoreProductOptionRelService {
     }
 
     public String delete(StoreProductOptionRelDto.DeleteRequest request) throws Exception{
-        repository.delete(repository.findByIdAndStoreId( request.getId(),request.getStoreId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_DELETE) ));
+        System.out.println(objectMapper.writeValueAsString(request));
+        repository.delete(repository.findByStoreProductIdAndStoreProductOptionId( request.getStoreProductId(),request.getStoreProductOptionId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_DELETE) ));
         return "200";
     }
 
-    public Boolean isExist(StoreProductOptionRelDto.SearchRequest request) throws Exception{
-        return repository.existsByStoreProductIdAndStoreProductOptionId(request.getStoreProductId(), request.getStoreProductOptionId());
-    }
+//    public Boolean isExist(StoreProductOptionRelDto.SearchRequest request) throws Exception{
+//        return repository.existsByStoreProductIdAndStoreProductOptionId(request.getStoreProductId(), request.getStoreProductOptionId());
+//    }
 }

@@ -46,12 +46,13 @@ public class StoreProductOptionService {
         StoreProductOptionEntity storeProductOptionEntity=request.toEntity();
         storeProductOptionEntity.setStatus(pre.isStatus());
         storeProductOptionEntity.setStoreProductOptionRelList(pre.getStoreProductOptionRelList());
+        storeProductOptionEntity.setStoreProductOptionItemList(pre.getStoreProductOptionItemList());
         return StoreProductOptionDto.Response.fromEntity(repository.save(storeProductOptionEntity));
     }
 
     public String delete(StoreProductOptionDto.DeleteRequest request) throws Exception{
         StoreProductOptionEntity storeProductEntity=repository.findByIdAndStoreId( request.getId(),request.getStoreId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_DELETE) );
-        storeProductEntity.setStatus(false);
+        storeProductEntity.setStatus(!storeProductEntity.isStatus());
         repository.save(storeProductEntity);
         return "200";
     }

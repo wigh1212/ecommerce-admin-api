@@ -40,6 +40,13 @@ public class StoreProductController {
     public CommonResponse update(@RequestBody StoreProductDto.UpdateRequest request) throws Exception {
         return CommonResponse.success(service.update(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }
+
+//    @Operation(summary = "삭제", description = "삭제")
+//    @DeleteMapping("/{storeId}/product/{id}")
+//    public CommonResponse delete( StoreProductDto.DeleteRequest request) throws Exception {
+//        return CommonResponse.success(service.delete(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
+//    }
+
     @Operation(summary = "삭제", description = "삭제")
     @DeleteMapping("/{storeId}/product/{id}")
     public CommonResponse delete( StoreProductDto.DeleteRequest request) throws Exception {

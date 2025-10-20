@@ -23,7 +23,7 @@ public class StoreProductCategoryRelController {
     }
 
     @Operation(summary = "삭제", description = "삭제")
-    @DeleteMapping("/{storeId}/product/category/rel/{id}")
+    @DeleteMapping("/{storeId}/product/category/rel")
     public CommonResponse delete( StoreProductCategoryRelDto.DeleteRequest request) throws Exception {
         return CommonResponse.success(service.delete(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }

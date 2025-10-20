@@ -77,6 +77,9 @@ public class StoreService {
     public StoreDto.Response update(StoreDto.UpdateRequest request) throws Exception{
         StoreEntity storeEntity=repository.findById(request.getId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_UPDATE));
         request.setBusinessNumber(storeEntity.getBusinessNumber());
+        request.setStatus(storeEntity.isStatus());
+        System.out.println(objectMapper.writeValueAsString(request));
+
         return StoreDto.Response.fromEntity(repository.save(request.toEntity()));
     }
 

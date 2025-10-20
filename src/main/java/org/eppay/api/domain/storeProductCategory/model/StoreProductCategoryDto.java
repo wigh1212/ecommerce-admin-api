@@ -22,7 +22,7 @@ public class StoreProductCategoryDto {
         private String name;
         private String description;
         @Builder.Default
-        private boolean statue=true;
+        private boolean status=true;
 
         public StoreProductCategoryEntity toEntity(Long id) {
             return StoreProductCategoryEntity.builder()
@@ -30,7 +30,7 @@ public class StoreProductCategoryDto {
                     .storeId(this.storeId)
                     .name(this.name)
                     .description(this.description)
-                    .status(this.statue)
+                    .status(this.status)
                     .build();
         }
     }
@@ -80,7 +80,7 @@ public class StoreProductCategoryDto {
                     .storeId(entity.getStoreId())
                     .name(entity.getName())
                     .description(entity.getDescription())
-                    .statue(entity.isStatus())
+                    .status(entity.isStatus())
                     .storeProductMapCategoryList(entity.getStoreProductCategoryRelList()!=null?  entity.getStoreProductCategoryRelList().stream().map(StoreProductCategoryRelDto.Response::fromEntity).collect(Collectors.toList()) : null)
                     .build();
 
@@ -90,6 +90,7 @@ public class StoreProductCategoryDto {
     @EqualsAndHashCode(callSuper = true)
     @Data
     @SuperBuilder
+    @NoArgsConstructor
     public static class DeleteRequest extends Common{
         private Long id;
     }
@@ -98,6 +99,7 @@ public class StoreProductCategoryDto {
     @EqualsAndHashCode(callSuper = true)
     @Data
     @SuperBuilder
+    @NoArgsConstructor
     public static class Custom extends Common {
         private Long id;
 

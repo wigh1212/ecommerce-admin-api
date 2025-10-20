@@ -43,12 +43,7 @@ public class StoreProductCategoryRelService {
     }
 
     public String delete(StoreProductCategoryRelDto.DeleteRequest request) throws Exception{
-        Optional<StoreProductCategoryRelEntity> optional=repository.findByIdAndStoreId( request.getId(),request.getStoreId());
-        if(optional.isEmpty()){
-            throw new BaseException(ErrorCode.RESPONSE_FAIL_DELETE);
-        }
-        repository.delete(optional.get());
-
+        repository.delete(repository.findByStoreProductIdAndStoreProductCategoryId(request.getStoreProductId(),request.getStoreProductCategoryId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_DELETE) ));
         return "200";
     }
 }
