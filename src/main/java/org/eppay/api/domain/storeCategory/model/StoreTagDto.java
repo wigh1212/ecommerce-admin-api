@@ -1,25 +1,26 @@
-package org.eppay.api.domain.category.model;
+package org.eppay.api.domain.storeCategory.model;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.eppay.api.domain.category.model.TagEntity;
 
-public class CategoryDto {
+public class StoreTagDto {
     @Data
     @SuperBuilder
     @NoArgsConstructor
     public static class Common {
-        private String name;
-        @Builder.Default
-        private boolean status=true;
+        private Long storeId;
+        private Long tagId;
+        private String tagName;
 
-        public CategoryEntity toEntity(Long id) {
-            return CategoryEntity.builder()
+        public StoreTagEntity toEntity(Long id) {
+            return StoreTagEntity.builder()
                     .id(id)
-                    .name(this.name)
-                    .status(this.status)
+                    .tagId(this.tagId)
+                    .storeId(this.storeId)
+                    .tagName(this.tagName)
                     .build();
         }
     }
@@ -39,7 +40,7 @@ public class CategoryDto {
     public static class CreateRequest extends Common {
         private Long id;
 
-        public CategoryEntity toEntity() {
+        public StoreTagEntity toEntity() {
             return super.toEntity(id);
         }
     }
@@ -53,7 +54,7 @@ public class CategoryDto {
 
         private Long test;
 
-        public CategoryEntity toEntity() {
+        public StoreTagEntity toEntity() {
             return super.toEntity(id);
         }
     }
@@ -65,11 +66,28 @@ public class CategoryDto {
     public static class Response extends Common {
         private Long id;
 
-        public static Response fromEntity(CategoryEntity entity) {
+        public static Response fromEntity(StoreTagEntity entity) {
             return Response.builder()
                     .id(entity.getId())
+                    .tagId(entity.getTagId())
+                    .storeId(entity.getStoreId())
+                    .tagName(entity.getTagName())
+                    .build();
+
+        }
+    }
+
+    @Data
+    @SuperBuilder
+    @NoArgsConstructor
+    public static class CustomResponse  {
+        private Long id;
+        private String name;
+        private boolean exists;
+        public static CustomResponse fromEntity(TagEntity entity) {
+            return CustomResponse.builder()
+                    .id(entity.getId())
                     .name(entity.getName())
-                    .status(entity.isStatus())
                     .build();
 
         }
@@ -79,7 +97,8 @@ public class CategoryDto {
     @SuperBuilder
     @NoArgsConstructor
     public static class DeleteRequest {
-        private Long id;
+        private Long tegId;
+        private Long storeId;
     }
 
 
@@ -90,7 +109,7 @@ public class CategoryDto {
     public static class Custom extends Common {
         private Long id;
 
-        public CategoryEntity toEntity() {
+        public StoreTagEntity toEntity() {
             return super.toEntity(id);
         }
     }

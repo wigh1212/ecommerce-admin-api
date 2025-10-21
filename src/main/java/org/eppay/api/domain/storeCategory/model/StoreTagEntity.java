@@ -10,8 +10,8 @@ import org.eppay.api.common.model.BaseCommEntity;
 @Getter
 @Setter
 @Builder
-@Table(name = "store_category")
-public class StoreCategoryEntity extends BaseCommEntity {
+@Table(name = "store_tag")
+public class StoreTagEntity extends BaseCommEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,10 +19,10 @@ public class StoreCategoryEntity extends BaseCommEntity {
     private Long id;
     @Column(name = "store_id")
     private Long storeId;
-    @Column(name = "category_id")
-    private Long categoryId;
-    @Column(name = "category_name")
-    private String categoryName;
+    @Column(name = "tag_id")
+    private Long tagId;
+    @Column(name = "tag_name")
+    private String tagName;
 
 
 }

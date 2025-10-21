@@ -9,8 +9,8 @@ import org.eppay.api.common.model.BaseCommEntity;
 @AllArgsConstructor
 @Data
 @Builder
-@Table(name = "category")
-public class CategoryEntity {
+@Table(name = "tag")
+public class TagEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
