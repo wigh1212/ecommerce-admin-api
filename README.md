@@ -187,7 +187,6 @@ admin_log : 관리자 활동 로그
 
 <a href="https://github.com/wigh1212/ecommerce-admin" target="_blank"> ecommerce-admin (Frontend Repository)</a>
 
-프론트엔드와 백엔드는 REST API를 통해 통신하며,
-관리자용 웹 콘솔을 중심으로 매장 관리 / 상품 관리 / 옵션 설정 / 주문 현황 대시보드 기능을 제공합니다.
+프론트엔드와 백엔드는 REST API를 통해 통신하며, 매장 관리 / 상품 관리 / 사이트관리 기능을 제공합니다.
 
 
