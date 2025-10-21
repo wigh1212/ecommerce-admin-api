@@ -178,4 +178,16 @@ admin_log : 관리자 활동 로그
 <br>
 <img width="1104" height="691" alt="image" src="https://github.com/user-attachments/assets/64fcc493-f35d-493b-8e67-d523aadb1c4d" />
 
+<hr />
+<b>9.연동 프로젝트(next.js) </b>
+<hr />
+
+이 프로젝트의 프론트엔드(UI)는 Next.js 15(App Router, TypeScript 기반) 으로 개발되었습니다.
+아래 링크에서 직접 코드를 확인하실 수 있습니다:
+
+<a href="https://github.com/wigh1212/ecommerce-admin" target="_blank"> ecommerce-admin (Frontend Repository)</a>
+
+프론트엔드와 백엔드는 REST API를 통해 통신하며,
+관리자용 웹 콘솔을 중심으로 매장 관리 / 상품 관리 / 옵션 설정 / 주문 현황 대시보드 기능을 제공합니다.
+
 
