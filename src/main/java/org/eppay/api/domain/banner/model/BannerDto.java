@@ -20,6 +20,7 @@ public class BannerDto {
         private String link;
         private String type;
         private boolean activate;
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
         private LocalDateTime applyAt;
         private String applyBy;
 

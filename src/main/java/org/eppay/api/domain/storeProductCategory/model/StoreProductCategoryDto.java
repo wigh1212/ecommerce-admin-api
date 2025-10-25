@@ -95,7 +95,6 @@ public class StoreProductCategoryDto {
         private Long id;
     }
 
-
     @EqualsAndHashCode(callSuper = true)
     @Data
     @SuperBuilder
@@ -107,5 +106,4 @@ public class StoreProductCategoryDto {
             return super.toEntity(id);
         }
     }
-
 }

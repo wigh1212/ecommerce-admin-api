@@ -17,17 +17,6 @@ import java.util.List;
 @ControllerAdvice
 public class CustomExceptionHandler {
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
-        List<String> details = new ArrayList<>();
-        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
-            details.add(error.getField() + " : " + error.getDefaultMessage());
-        }
-
-        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), "Validation Failed", details);
-        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
-    }
-
     @ExceptionHandler(BaseException.class)
     @ResponseBody
     public CommonResponse handleBaseException(BaseException ex) {
@@ -38,4 +27,29 @@ public class CustomExceptionHandler {
         }
         return CommonResponse.fail(ex.getRespMessage(), ex.getRespCode());
     }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseBody
+    public CommonResponse handleValidationException(MethodArgumentNotValidException ex) {
+        String message = ex.getBindingResult()
+                .getFieldErrors()
+                .get(0)
+                .getDefaultMessage(); // 첫 번째 오류 메시지 추출
+
+        return CommonResponse.fail(message, "2000");
+    }
+
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    @ResponseBody
+//    public ResponseEntity<CommonResponse> handleValidationException(MethodArgumentNotValidException ex) {
+//        String message = ex.getBindingResult()
+//                .getFieldErrors()
+//                .get(0)
+//                .getDefaultMessage(); // 첫 번째 오류 메시지 추출
+//
+//        CommonResponse response = CommonResponse.fail(message, "2000");
+//        return ResponseEntity
+//                .status(HttpStatus.BAD_REQUEST) // 헤더 HTTP 코드 400
+//                .body(response);
+//    }
 }

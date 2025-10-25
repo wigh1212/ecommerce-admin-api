@@ -1,9 +1,7 @@
 package org.eppay.api.domain.store.service;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.eppay.api.common.enums.ErrorCode;
@@ -78,6 +76,7 @@ public class StoreService {
         StoreEntity storeEntity=repository.findById(request.getId()).orElseThrow(() -> new BaseException(ErrorCode.RESPONSE_FAIL_UPDATE));
         request.setBusinessNumber(storeEntity.getBusinessNumber());
         request.setStatus(storeEntity.isStatus());
+
         System.out.println(objectMapper.writeValueAsString(request));
 
         return StoreDto.Response.fromEntity(repository.save(request.toEntity()));

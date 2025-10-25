@@ -17,21 +17,25 @@ import org.springframework.web.bind.annotation.*;
 public class StoreProductCategoryController {
 
     private final StoreProductCategoryService service;
+
     @Operation(summary = "조회", description = "조회")
     @GetMapping("/{storeId}/product/category")
     public CommonResponse getList(StoreProductCategoryDto.SearchRequest request) throws Exception {
         return CommonResponse.success(service.getList(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }
+
     @Operation(summary = "상세 조회", description = "상세 조회")
     @GetMapping("/{storeId}/product/category/{id}")
     public CommonResponse getOne(StoreProductCategoryDto.SearchRequest request) throws Exception {
         return CommonResponse.success(service.getOne(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }
+
     @Operation(summary = "생성", description = "생성")
     @PostMapping("/{storeId}/product/category")
     public CommonResponse create(@RequestBody StoreProductCategoryDto.CreateRequest request) throws Exception {
         return CommonResponse.success(service.create(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }
+
     @Operation(summary = "수정", description = "수정")
     @PutMapping("/{storeId}/product/category/{id}")
     public CommonResponse update(@RequestBody StoreProductCategoryDto.UpdateRequest request) throws Exception {
