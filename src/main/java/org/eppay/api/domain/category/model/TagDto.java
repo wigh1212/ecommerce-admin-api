@@ -1,5 +1,6 @@
 package org.eppay.api.domain.category.model;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,6 +12,7 @@ public class TagDto {
     @SuperBuilder
     @NoArgsConstructor
     public static class Common {
+        @NotBlank(message = "카테고리명을 입력해 주세요")
         private String name;
         @Builder.Default
         private boolean status=true;

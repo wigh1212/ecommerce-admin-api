@@ -1,5 +1,6 @@
 package org.eppay.api.domain.storeCategory.model;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,9 @@ public class StoreTagDto {
     @SuperBuilder
     @NoArgsConstructor
     public static class Common {
+        @NotBlank(message = "가맹점 id 오류.")
         private Long storeId;
+        @NotBlank(message = "태그 id 오류.")
         private Long tagId;
         private String tagName;
 

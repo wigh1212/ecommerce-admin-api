@@ -18,9 +18,11 @@ public class StoreProductOptionRelDto {
     @NoArgsConstructor
     public static class Common {
 
-        @NotNull(message = "storeId는 필수 입니다.")
+        @NotNull(message = "가맹점 id 오류")
         private Long storeId;
+        @NotNull(message = "상품 id 오류")
         private Long storeProductId;
+        @NotNull(message = "상품 옵션 id 오류")
         private Long storeProductOptionId;
 
         public StoreProductOptionRelEntity toEntity(Long id) {

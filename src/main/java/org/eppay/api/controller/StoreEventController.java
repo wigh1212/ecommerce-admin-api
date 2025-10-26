@@ -2,6 +2,7 @@ package org.eppay.api.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.eppay.api.common.enums.SuccessCode;
 import org.eppay.api.common.response.CommonResponse;
@@ -27,12 +28,12 @@ public class StoreEventController {
     }
     @Operation(summary = "생성", description = "생성")
     @PostMapping("/{storeId}/event")
-    public CommonResponse create(@RequestBody StoreEventDto.CreateRequest request) throws Exception {
+    public CommonResponse create(@Valid @RequestBody StoreEventDto.CreateRequest request) throws Exception {
         return CommonResponse.success(service.create(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }
     @Operation(summary = "수정", description = "수정")
     @PutMapping("/{storeId}/event/{id}")
-    public CommonResponse update(@RequestBody StoreEventDto.UpdateRequest request) throws Exception {
+    public CommonResponse update(@Valid @RequestBody StoreEventDto.UpdateRequest request) throws Exception {
         return CommonResponse.success(service.update(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }
     @Operation(summary = "삭제", description = "삭제")

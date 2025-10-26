@@ -32,12 +32,12 @@ public class StoreProductController {
     }
     @Operation(summary = "생성", description = "생성")
     @PostMapping("/{storeId}/product")
-    public CommonResponse create(@RequestBody StoreProductDto.CreateRequest request) throws Exception {
+    public CommonResponse create(@Valid @RequestBody StoreProductDto.CreateRequest request) throws Exception {
         return CommonResponse.success(service.create(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }
     @Operation(summary = "수정", description = "수정")
     @PutMapping("/{storeId}/product/{id}")
-    public CommonResponse update(@RequestBody StoreProductDto.UpdateRequest request) throws Exception {
+    public CommonResponse update(@Valid @RequestBody StoreProductDto.UpdateRequest request) throws Exception {
         return CommonResponse.success(service.update(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }
 

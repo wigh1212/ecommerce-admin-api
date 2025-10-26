@@ -19,10 +19,13 @@ public class StoreProductOptionItemDto {
     @NoArgsConstructor
     public static class Common {
 
-        @NotNull(message = "storeId는 필수 입니다.")
+        @NotNull(message = "가맹점 id 오류")
         private Long storeId;
+        @NotNull(message = "옵션 id 오류")
         private Long storeProductOptionId;
+        @NotNull(message = "옵션아이템명을 입력해 주세요")
         private String name;
+        @NotNull(message = "옵션 금액을 입력해 주세요")
         private BigDecimal amount;
 
         public StoreProductOptionItemEntity toEntity(Long id) {

@@ -2,6 +2,7 @@ package org.eppay.api.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.eppay.api.common.enums.SuccessCode;
 import org.eppay.api.common.response.CommonResponse;
@@ -19,7 +20,7 @@ public class StoreProductOptionRelController {
     private final StoreProductOptionRelService service;
     @Operation(summary = "매핑", description = "매핑")
     @PostMapping("/{storeId}/product/option/rel")
-    public CommonResponse create(@RequestBody StoreProductOptionRelDto.CreateRequest request) throws Exception {
+    public CommonResponse create(@Valid @RequestBody StoreProductOptionRelDto.CreateRequest request) throws Exception {
         return CommonResponse.success(service.create(request), SuccessCode.COMMON_SYSTEM_SUCCESS.getCode());
     }
 

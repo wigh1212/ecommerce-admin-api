@@ -21,9 +21,11 @@ public class StoreProductDto {
     @NoArgsConstructor
     public static class Common {
 
-        @NotNull(message = "storeId는 필수 입니다.")
+        @NotNull(message = "가맹점 id 오류.")
         private Long storeId;
+        @NotNull(message = "상품명을 입력해 주세요")
         private String name;
+        @NotNull(message = "금액을 입력해 주세요")
         private BigDecimal amount;
         private String image;
         private String info;

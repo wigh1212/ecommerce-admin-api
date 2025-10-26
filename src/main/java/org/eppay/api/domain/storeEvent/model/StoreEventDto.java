@@ -14,7 +14,7 @@ public class StoreEventDto {
     @NoArgsConstructor
     public static class Common {
 
-        @NotNull(message = "storeId는 필수 입니다.")
+        @NotNull(message = "가맹점 id 오류")
         private Long storeId;
         private String name;
         private String image;

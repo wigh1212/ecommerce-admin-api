@@ -17,8 +17,9 @@ public class StoreProductCategoryDto {
     @NoArgsConstructor
     public static class Common {
 
-        @NotNull(message = "storeId는 필수 입니다.")
+        @NotNull(message = "가맹점 id 오류")
         private Long storeId;
+        @NotNull(message = "카테고리명을 입력해 주세요")
         private String name;
         private String description;
         @Builder.Default
