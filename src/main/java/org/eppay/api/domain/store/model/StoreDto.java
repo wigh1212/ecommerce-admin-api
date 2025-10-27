@@ -19,8 +19,8 @@ public class StoreDto {
         @Size(max = 50, message = "매장명은 50자 이하로 입력해야 합니다.")
         private String name;
 
-        @NotBlank(message = "사업자번호는 필수 입력 항목입니다.")
-        @Pattern(regexp = "\\d{10}", message = "사업자번호는 숫자 10자리 형식이어야 합니다.")
+//        @NotBlank(message = "사업자번호는 필수 입력 항목입니다.")
+//        @Pattern(regexp = "\\d{10}", message = "사업자번호는 숫자 10자리 형식이어야 합니다.")
         private String businessNumber;
 
         @NotBlank(message = "대표자명은 필수 입력 항목입니다.")

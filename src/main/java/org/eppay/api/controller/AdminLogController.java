@@ -3,6 +3,7 @@ package org.eppay.api.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.eppay.api.common.annotations.LogDescription;
 import org.eppay.api.common.enums.SuccessCode;
 import org.eppay.api.common.response.CommonResponse;
 import org.eppay.api.domain.admin.model.AdminDto;
